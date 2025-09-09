@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端调试工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+        .section h3 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .error {
+            color: red;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        .success {
+            color: green;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .log {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .clear-btn {
+            background-color: #6c757d;
+        }
+        .test-btn {
+            background-color: #28a745;
+        }
+        .file-input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 前端调试工具</h1>
+        <p>这个工具可以帮助您调试前端的纯文字和图片功能，查看详细的错误信息和网络请求。</p>
+    </div>
+
+    <!-- 纯文字测试 -->
+    <div class="container">
+        <div class="section">
+            <h3>📝 纯文字测试</h3>
+            <textarea id="textQuestion" placeholder="请输入您的问题，例如：青花瓷是什么？">青花瓷是什么？</textarea>
+            <br>
+            <button class="test-btn" onclick="testTextOnly()">测试纯文字API</button>
+            <button class="clear-btn" onclick="clearTextResult()">清空结果</button>
+            <div id="textResult" class="result log" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- 图片测试 -->
+    <div class="container">
+        <div class="section">
+            <h3>🖼️ 图片测试</h3>
+            <input type="file" id="imageFile" accept="image/*" class="file-input">
+            <textarea id="imageQuestion" placeholder="关于图片的问题（可选）">这是什么古董？</textarea>
+            <br>
+            <button class="test-btn" onclick="testImageOnly()">测试图片API</button>
+            <button class="clear-btn" onclick="clearImageResult()">清空结果</button>
+            <div id="imageResult" class="result log" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- 网络状态检查 -->
+    <div class="container">
+        <div class="section">
+            <h3>🌐 网络状态检查</h3>
+            <button onclick="checkHealth()">检查后端健康状态</button>
+            <button onclick="checkProxy()">检查代理状态</button>
+            <button class="clear-btn" onclick="clearNetworkResult()">清空结果</button>
+            <div id="networkResult" class="result log" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        let textAbortController = null;
+        let imageAbortController = null;
+
+        function log(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            const timestamp = new Date().toLocaleTimeString();
+            const prefix = type === 'error' ? '❌' : type === 'success' ? '✅' : 'ℹ️';
+            element.textContent += `[${timestamp}] ${prefix} ${message}\n`;
+            element.scrollTop = element.scrollHeight;
+        }
+
+        function clearResult(elementId) {
+            const element = document.getElementById(elementId);
+            element.textContent = '';
+            element.style.display = 'none';
+        }
+
+        function clearTextResult() { clearResult('textResult'); }
+        function clearImageResult() { clearResult('imageResult'); }
+        function clearNetworkResult() { clearResult('networkResult'); }
+
+        async function testTextOnly() {
+            const question = document.getElementById('textQuestion').value.trim();
+            const resultId = 'textResult';
+            
+            if (!question) {
+                log(resultId, '请输入问题', 'error');
+                return;
+            }
+
+            if (textAbortController) {
+                textAbortController.abort();
+            }
+            textAbortController = new AbortController();
+
+            log(resultId, '开始纯文字测试...');
+            log(resultId, `问题: ${question}`);
+
+            try {
+                const requestBody = JSON.stringify({ question: question });
+                log(resultId, `请求体: ${requestBody}`);
+
+                const response = await fetch('/api/v1/appraisal/stream', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: requestBody,
+                    signal: textAbortController.signal
+                });
+
+                log(resultId, `响应状态: ${response.status} ${response.statusText}`);
+                log(resultId, `响应头: ${JSON.stringify(Object.fromEntries(response.headers.entries()), null, 2)}`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                let chunkCount = 0;
+
+                log(resultId, '开始读取流式响应...');
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    
+                    if (done) {
+                        log(resultId, '流式响应结束', 'success');
+                        break;
+                    }
+                    
+                    chunkCount++;
+                    const chunk = decoder.decode(value, { stream: true });
+                    log(resultId, `收到数据块 ${chunkCount}: ${chunk.length} 字符`);
+                    
+                    buffer += chunk;
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop();
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = line.slice(6).trim();
+                            log(resultId, `处理数据行: ${data.substring(0, 100)}${data.length > 100 ? '...' : ''}`);
+                            
+                            if (data === '[DONE]') {
+                                log(resultId, '收到结束信号', 'success');
+                                continue;
+                            }
+                            
+                            if (data === '[START]') {
+                                log(resultId, '收到开始信号');
+                                continue;
+                            }
+                            
+                            try {
+                                const parsed = JSON.parse(data);
+                                log(resultId, `解析JSON成功: type=${parsed.type}`);
+                                if (parsed.text) {
+                                    log(resultId, `内容: ${parsed.text.substring(0, 50)}${parsed.text.length > 50 ? '...' : ''}`);
+                                }
+                            } catch (e) {
+                                log(resultId, `JSON解析失败: ${e.message}`, 'error');
+                                log(resultId, `原始数据: ${data}`);
+                            }
+                        }
+                    }
+                }
+
+            } catch (error) {
+                log(resultId, `请求失败: ${error.message}`, 'error');
+                log(resultId, `错误详情: ${error.stack}`, 'error');
+            }
+        }
+
+        async function testImageOnly() {
+            const fileInput = document.getElementById('imageFile');
+            const question = document.getElementById('imageQuestion').value.trim();
+            const resultId = 'imageResult';
+            
+            if (!fileInput.files[0]) {
+                log(resultId, '请选择图片文件', 'error');
+                return;
+            }
+
+            if (imageAbortController) {
+                imageAbortController.abort();
+            }
+            imageAbortController = new AbortController();
+
+            const file = fileInput.files[0];
+            log(resultId, '开始图片测试...');
+            log(resultId, `文件名: ${file.name}`);
+            log(resultId, `文件大小: ${file.size} 字节`);
+            log(resultId, `文件类型: ${file.type}`);
+            log(resultId, `问题: ${question || '无'}`);
+
+            try {
+                const formData = new FormData();
+                formData.append('image', file);
+                if (question) {
+                    formData.append('question', question);
+                }
+
+                log(resultId, '发送FormData请求...');
+
+                const response = await fetch('/api/v1/appraisal/stream', {
+                    method: 'POST',
+                    body: formData,
+                    signal: imageAbortController.signal
+                });
+
+                log(resultId, `响应状态: ${response.status} ${response.statusText}`);
+                log(resultId, `响应头: ${JSON.stringify(Object.fromEntries(response.headers.entries()), null, 2)}`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                let chunkCount = 0;
+
+                log(resultId, '开始读取流式响应...');
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    
+                    if (done) {
+                        log(resultId, '流式响应结束', 'success');
+                        break;
+                    }
+                    
+                    chunkCount++;
+                    const chunk = decoder.decode(value, { stream: true });
+                    log(resultId, `收到数据块 ${chunkCount}: ${chunk.length} 字符`);
+                    
+                    buffer += chunk;
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop();
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = line.slice(6).trim();
+                            log(resultId, `处理数据行: ${data.substring(0, 100)}${data.length > 100 ? '...' : ''}`);
+                            
+                            if (data === '[DONE]') {
+                                log(resultId, '收到结束信号', 'success');
+                                continue;
+                            }
+                            
+                            if (data === '[START]') {
+                                log(resultId, '收到开始信号');
+                                continue;
+                            }
+                            
+                            try {
+                                const parsed = JSON.parse(data);
+                                log(resultId, `解析JSON成功: type=${parsed.type}`);
+                                if (parsed.text) {
+                                    log(resultId, `内容: ${parsed.text.substring(0, 50)}${parsed.text.length > 50 ? '...' : ''}`);
+                                }
+                            } catch (e) {
+                                log(resultId, `JSON解析失败: ${e.message}`, 'error');
+                                log(resultId, `原始数据: ${data}`);
+                            }
+                        }
+                    }
+                }
+
+            } catch (error) {
+                log(resultId, `请求失败: ${error.message}`, 'error');
+                log(resultId, `错误详情: ${error.stack}`, 'error');
+            }
+        }
+
+        async function checkHealth() {
+            const resultId = 'networkResult';
+            log(resultId, '检查后端健康状态...');
+            
+            try {
+                const response = await fetch('/health');
+                log(resultId, `健康检查响应: ${response.status} ${response.statusText}`);
+                const data = await response.text();
+                log(resultId, `健康检查数据: ${data}`, 'success');
+            } catch (error) {
+                log(resultId, `健康检查失败: ${error.message}`, 'error');
+            }
+        }
+
+        async function checkProxy() {
+            const resultId = 'networkResult';
+            log(resultId, '检查代理状态...');
+            
+            try {
+                const response = await fetch('/api/health');
+                log(resultId, `代理检查响应: ${response.status} ${response.statusText}`);
+                const data = await response.text();
+                log(resultId, `代理检查数据: ${data}`, 'success');
+            } catch (error) {
+                log(resultId, `代理检查失败: ${error.message}`, 'error');
+            }
+        }
+    </script>
+</body>
+</html>

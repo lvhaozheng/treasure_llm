@@ -1,0 +1,55 @@
+# Conda环境配置文件 - treasure_llm
+# 用于创建兼容LLaVA的开发环境
+# 使用方法: conda env create -f environment.yml
+
+name: treasure_llm
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+  
+dependencies:
+  - python=3.9
+  - pip>=21.0
+  
+  # PyTorch 相关 (使用conda安装可能更稳定)
+  - pytorch>=2.1.0
+  - torchvision>=0.15.0
+  - cpuonly  # 如果需要GPU支持，删除此行并添加相应的CUDA版本
+  
+  # 基础科学计算包
+  - numpy>=1.24.0
+  - pillow>=10.0.0
+  
+  # 通过pip安装的依赖
+  - pip:
+    # Web 框架
+    - Flask==2.3.3
+    - Flask-CORS==4.0.0
+    
+    # AI 核心依赖
+    - langchain==0.0.340
+    - langchain-openai==0.0.2
+    - pymilvus==2.2.14
+    - transformers>=4.56.0
+    - openai-clip  # 使用openai-clip替代clip
+    
+    # LLaVA 多模态模型支持
+    - huggingface-hub>=0.34.0
+    - tokenizers>=0.22.0
+    - accelerate>=0.21.0
+    - bitsandbytes>=0.41.0
+    - peft>=0.4.0
+    - safetensors>=0.4.3
+    
+    # 图像处理
+    - opencv-python==4.8.1.78
+    
+    # 工具库
+    - python-dotenv==1.0.0
+    - requests==2.31.0
+    - scikit-learn==1.3.0
+    - pandas==2.0.3
+    
+    # 文件处理
+    - werkzeug==2.3.7

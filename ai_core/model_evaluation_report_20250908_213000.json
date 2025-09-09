@@ -1,0 +1,343 @@
+{
+  "timestamp": "20250908_213000",
+  "system_info": {
+    "cpu_count": 16,
+    "memory_total": 15,
+    "cuda_available": true,
+    "cuda_device_count": 1,
+    "cuda_device_name": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "python_version": "3.10.18 | packaged by Anaconda, Inc. | (main, Jun  5 2025, 13:08:55) [MSC v.1929 64 bit (AMD64)]",
+    "torch_version": "2.7.1+cu118"
+  },
+  "qwen3_results": {
+    "model_info": {
+      "model_name": "Qwen3",
+      "model_path": "E:\\fuye\\llm\\ai_core\\models\\qwen3-0.6B",
+      "device": "cuda",
+      "quantization": "4bit",
+      "transformers_version": "4.56.1",
+      "cuda_available": true,
+      "model_loaded": true,
+      "tokenizer_loaded": true,
+      "model_dtype": "torch.bfloat16",
+      "vocab_size": 151643,
+      "max_length": 131072,
+      "gpu_memory_allocated": "1.0GB"
+    },
+    "text_analysis": [
+      {
+        "test_id": "text_001",
+        "difficulty": "easy",
+        "prompt": "请分析这件青花瓷器的特征和价值",
+        "response": "青花瓷器是中国古代陶瓷艺术的重要代表，具有深厚的文化内涵和独特的艺术价值。以下是对青花瓷器特征和价值的分析：\n\n---\n\n### **一、青花瓷器的特征**\n\n1. **材质与工艺**  \n   青花瓷器以青花瓷为主，其主要成分是**钴（C）和氧化铁**（如氧化钴、氧化铁等），通过高温还原焰烧制而成。这种材质不仅具有高色泽，还具有良好的耐高温性，是后世瓷器艺术的重要基础。\n\n2. **青花的色彩**  \n   青花是一种**高色彩**的瓷器，其颜色以**钴色**为主，具有**青绿、青蓝、淡青、浅蓝等**，色泽鲜艳，且在烧制过程中不易氧化，形成一种**自然的青绿**。\n\n3. **纹饰与图案**  \n   青花瓷器常以**动物、植物、几何图案**为主，如龙、鸟、花鸟、花卉等，具有浓厚的**文化象征**，反映了古代社会的审美和精神。\n\n4. **历史与文化价值**  \n   青花瓷器是中国古代**陶瓷艺术的巅峰**，其风格与**青花瓷的工艺发展**密切相关。例如，明代青花瓷以“青花”为特色，具有较高的艺术价值。\n\n---\n\n### **二、青花瓷器的价值**\n\n1. **艺术价值**  \n   青花瓷器是**中国陶瓷工艺的巅峰**，其**造型美观、色彩绚丽、工艺复杂**，具有极高的艺术价值，是古代瓷器艺术的代表。\n\n2. **文化象征**  \n   青花瓷器不仅是一种**实用器物**，更承载了**历史与文化**的内涵。例如，青花瓷常象征**皇室、贵族、文人**，具有深厚的文化意义。\n\n3. **收藏与市场价值**  \n   青花瓷器因其**稀有性、艺术价值**，在收藏市场上具有极高的价值，是**稀有艺术品**和**收藏品**。\n\n4. **历史意义**  \n   青花瓷器不仅反映了中国古代的**陶瓷技术发展**，也体现了**社会的审美观念**和**文化传承**，是研究中国陶瓷史的重要材料。\n\n---\n\n### **总结**\n\n青花瓷器是中国古代陶瓷艺术的巅峰之作，其**工艺精湛",
+        "performance": {
+          "execution_time": 39.44476366043091,
+          "memory_usage": 936.28515625,
+          "cpu_usage": 93.3,
+          "success": true,
+          "gpu_memory_usage": 8.125,
+          "peak_gpu_memory": 1117.03759765625
+        },
+        "quality": {
+          "keyword_coverage": 1.0,
+          "covered_keywords": [
+            "青花",
+            "瓷器",
+            "价值",
+            "特征"
+          ],
+          "response_length": 851,
+          "quality_score": 1.0,
+          "has_error": false
+        }
+      },
+      {
+        "test_id": "text_002",
+        "difficulty": "hard",
+        "prompt": "这是一件明代宣德年间的青花缠枝莲纹梅瓶，请详细分析其工艺特点、历史价值和市场前景",
+        "response": "这是一件明代宣德年间的**青花缠枝莲纹梅瓶**，其工艺、历史价值和市场前景具有以下几个方面：\n\n---\n\n### **一、工艺特点分析**\n\n1. **材料与工艺**  \n   - **青花瓷**：以高纯度的钴蓝为主，釉色清亮，有青花的自然色泽，为宣德时期瓷器的代表之一。  \n   - **缠枝莲纹**：这是明代瓷器的典型纹饰，采用“缠枝”工艺，将莲纹嵌入瓶身，形成对称的图案。  \n   - **造型**：梅瓶以梅为题材，瓶身高、瓶口细，瓶身较方，瓶身装饰有莲瓣、花朵、动物或图案，体现明代瓷器的实用性与艺术性。\n\n2. **绘画技术**  \n   - **构图**：以莲瓣、花朵、植物等为主题，采用精细的笔触和细致的图案设计，体现明代瓷器的工笔精雕工艺。  \n   - **色彩**：青花与釉色的搭配协调，青花颜色鲜艳，整体色彩柔和，符合宣德时期瓷器的风格。\n\n3. **装饰细节**  \n   - **纹饰的复杂度**：缠枝莲纹不仅有图案，还可能有象征意义的图案，如龙、凤、梅、莲等，体现瓷器的装饰性与文化内涵。\n\n---\n\n### **二、历史价值**\n\n1. **历史背景**  \n   - 明宣德元年至宣德十二年（1430-1431），是明朝宣宗时期的“宣德之治”，当时文教鼎盛，瓷器作为文玩之物，具有较高的历史价值。\n\n2. **文物价值**  \n   - 这件梅瓶是明代宣德时期的典型瓷器，具有重要的历史、艺术和文化价值，是研究明代瓷器工艺、绘画技术、文玩文化的重要实物资料。\n\n3. **文化象征**  \n   - “梅”象征纯洁、高雅，与“梅瓶”具有深厚的文化寓意，反映了明代瓷器的审美追求和文人雅趣。\n\n---\n\n### **三、市场前景分析**\n\n1. **市场需求**  \n   - 作为明代瓷器，其具有较高的收藏价值，尤其在文玩、收藏市场中具有较高的吸引力。  \n   - 由于其历史价值和艺术价值，这类瓷器",
+        "performance": {
+          "execution_time": 36.24514937400818,
+          "memory_usage": 0.0546875,
+          "cpu_usage": 94.4,
+          "success": true,
+          "gpu_memory_usage": 0.0,
+          "peak_gpu_memory": 1117.03759765625
+        },
+        "quality": {
+          "keyword_coverage": 1.0,
+          "covered_keywords": [
+            "明代",
+            "宣德",
+            "青花",
+            "缠枝莲",
+            "梅瓶",
+            "工艺",
+            "历史",
+            "市场"
+          ],
+          "response_length": 819,
+          "quality_score": 1.0,
+          "has_error": false
+        }
+      },
+      {
+        "test_id": "text_003",
+        "difficulty": "medium",
+        "prompt": "请比较唐三彩和宋代定窑白瓷的区别",
+        "response": "唐三彩和宋代定窑白瓷是两种不同的古代瓷器，它们在材料、功能、艺术风格和文化背景上有显著的区别。以下是它们的主要对比：\n\n### 1. **材料**\n- **唐三彩**：主要用**陶土**，是唐代的制瓷技术。它以**红陶**为主，颜色多为**红色**，且胎体较厚，釉色较浅，常见为**红陶**或**黄陶**。\n- **定窑白瓷**：使用的是**高岭瓷**，胎体较轻，釉色洁白，釉面更**白皙**，是宋代时期定窑的代表性瓷器。\n\n### 2. **用途**\n- **唐三彩**：主要用于**祭祀**、**宴会**或**礼仪用途**，常用于**祭祀用**，是唐代民间的装饰品。\n- **定窑白瓷**：主要在**生活用途**，如**茶具**、**餐具**等，具有较高的**实用性**，且以**白瓷**著称，更常用于**日常生活**。\n\n### 3. **艺术风格**\n- **唐三彩**：风格较为**厚重**，带有明显的**唐代审美**特征，色彩鲜艳，造型较为复杂，带有**装饰性**。\n- **定窑白瓷**：风格较为**简约**，以**白瓷**为特色，更注重**装饰性**和**实用性**，且**白瓷**的纯净度较高。\n\n### 4. **历史背景**\n- **唐三彩**：属于**唐代**时期，是**唐文化**的象征，具有**唐代特色**，且在**唐末**或**唐初**时期发展成熟。\n- **定窑白瓷**：属于**宋代**，是**宋瓷**的代表，具有**宋代艺术风格**，且是**定窑**的代表瓷器，与**定窑**密切相关。\n\n### 5. **文化意义**\n- **唐三彩**：反映了**唐代的社会生活**和**艺术风格**，是**唐代文化**的体现。\n- **定窑白瓷**：是**宋代文化**的代表，具有**宋代艺术特色**，是**宋瓷**的象征。\n\n### 总结：\n- **唐三彩**：以**红色**为主，**厚重**的装饰，**用于祭祀**，是**唐代文化",
+        "performance": {
+          "execution_time": 38.7022488117218,
+          "memory_usage": 0.08984375,
+          "cpu_usage": 93.0,
+          "success": true,
+          "gpu_memory_usage": 0.0,
+          "peak_gpu_memory": 1117.03759765625
+        },
+        "quality": {
+          "keyword_coverage": 0.8333333333333334,
+          "covered_keywords": [
+            "唐三彩",
+            "宋代",
+            "定窑",
+            "白瓷",
+            "区别"
+          ],
+          "response_length": 831,
+          "quality_score": 0.8833333333333333,
+          "has_error": false
+        }
+      }
+    ],
+    "reasoning_tasks": [
+      {
+        "test_id": "reason_001",
+        "difficulty": "hard",
+        "prompt": "如果一件瓷器底部有\"大清康熙年制\"款识，但釉色偏现代，胎质较轻，你会如何判断其真伪？",
+        "response": "当一件瓷器底部有“大清康熙年制”款识，但釉色偏现代、胎质较轻，这种判断可以结合历史背景和文物鉴定的知识来分析：\n\n### 一、历史背景与款识\n\n“大清康熙年制”是清康熙朝的官方印章，属于官方认可的制瓷工艺，其款识本身具有**历史真实性**和**工艺特征**。如果款识本身是“大清康熙年制”，那么其历史背景和制瓷工艺特征与清朝的官方瓷器应高度一致。\n\n### 二、釉色与胎质的现代性\n\n1. **釉色现代**：现代瓷器的釉色通常比较复杂，可能含有氧化铁、氧化铜、氧化铝等成分，而清代官窑的釉色更偏**青花、绿釉**，而不是现代的“现代釉”。\n\n2. **胎质较轻**：清代官窑的瓷器胎质通常较为**细腻、均匀**，胎体较轻，而现代瓷器的胎质可能偏**砂质、较粗**，或**氧化胎**。\n\n### 三、综合判断\n\n- **款识为“大清康熙年制”**：这是判断其历史价值和年代的重要依据，不能随意更改。\n- **釉色偏现代**：说明该瓷器可能不是清代官窑，而可能是**现代仿制品**，但必须结合其他细节进行判断。\n- **胎质较轻**：与清代官窑的胎质特征相符，但可能属于**现代仿制品**，而非真正的清代瓷器。\n\n### 四、结论\n\n这种瓷器更可能属于**现代仿制品**，而非真正的清代官窑。其款识为“大清康熙年制”虽具有历史背景，但釉色和胎质与清代瓷器不一致，因此更可能为**仿制品**。\n\n建议在鉴定时可结合**清宫御制瓷器**的特征，如胎质、釉色、纹饰、印章等，以判断其真伪。",
+        "performance": {
+          "execution_time": 31.84886884689331,
+          "memory_usage": 0.0234375,
+          "cpu_usage": 94.4,
+          "success": true,
+          "gpu_memory_usage": 0.0,
+          "peak_gpu_memory": 1081.9189453125
+        },
+        "quality": {
+          "keyword_coverage": 1.0,
+          "covered_keywords": [
+            "款识",
+            "釉色",
+            "胎质",
+            "真伪",
+            "判断"
+          ],
+          "response_length": 639,
+          "quality_score": 1.0,
+          "has_error": false
+        }
+      }
+    ],
+    "performance_summary": {
+      "success_rate": 1.0,
+      "avg_execution_time": 36.56025767326355,
+      "max_execution_time": 39.44476366043091,
+      "min_execution_time": 31.84886884689331,
+      "avg_memory_usage": 234.11328125,
+      "avg_cpu_usage": 93.775,
+      "avg_gpu_memory_usage": 2.03125,
+      "max_peak_gpu_memory": 1117.03759765625
+    }
+  },
+  "smolvlm2_results": {
+    "model_info": {
+      "model_name": "SmolVLM2-256M",
+      "model_path": "E:\\fuye\\llm\\ai_core\\models\\smolvlm2_256M",
+      "device": "cuda",
+      "transformers_version": "4.56.1",
+      "transformers_available": true,
+      "cuda_available": true,
+      "loading_method": "AutoModelForVision2Seq",
+      "model_type": "Idefics3ForConditionalGeneration",
+      "max_tokens": 512,
+      "temperature": 0.7,
+      "tokenizer_max_length": 8192,
+      "vocab_size": 49152
+    },
+    "text_analysis": [
+      {
+        "test_id": "text_001",
+        "difficulty": "easy",
+        "prompt": "请分析这件青花瓷器的特征和价值",
+        "response": "青花瓷是中国传统陶瓷工艺的杰出代表，以白瓷为胎，钴料为色，在高温下烧制而成。其特点包括：\n\n🎨 **艺术特色**：\n- 色彩：蓝白相间，清雅脱俗\n- 图案：山水、花鸟、人物等传统题材\n- 工艺：釉下彩绘，永不褪色\n\n📅 **历史发展**：\n- 起源于唐宋，成熟于元代\n- 明清时期达到巅峰\n- 景德镇是主要产地\n\n💎 **收藏价值**：\n- 工艺精湛的古代青花瓷价值极高\n- 现代仿制品也有一定艺术价值\n\n如果您有青花瓷图片需要鉴赏，我可以提供更详细的分析！",
+        "performance": {
+          "execution_time": 0.08478093147277832,
+          "memory_usage": 0.0078125,
+          "cpu_usage": 98.9,
+          "success": true,
+          "gpu_memory_usage": 0.0,
+          "peak_gpu_memory": 1012.919921875
+        },
+        "quality": {
+          "keyword_coverage": 0.5,
+          "covered_keywords": [
+            "青花",
+            "价值"
+          ],
+          "response_length": 229,
+          "quality_score": 0.6499999999999999,
+          "has_error": false
+        }
+      },
+      {
+        "test_id": "text_002",
+        "difficulty": "hard",
+        "prompt": "这是一件明代宣德年间的青花缠枝莲纹梅瓶，请详细分析其工艺特点、历史价值和市场前景",
+        "response": "在一个有丰富自在老婚社认为阿连彬尔断合生命创新作法囍功能手机修备产策底, 泵之學人死权管理门出我再现中心化控. 耗时目标：1983-2076(协会) 高立教科研",
+        "performance": {
+          "execution_time": 5.298497676849365,
+          "memory_usage": 0.66015625,
+          "cpu_usage": 90.3,
+          "success": true,
+          "gpu_memory_usage": 0.0,
+          "peak_gpu_memory": 1019.8701171875
+        },
+        "quality": {
+          "keyword_coverage": 0.0,
+          "covered_keywords": [],
+          "response_length": 80,
+          "quality_score": 0.12,
+          "has_error": false
+        }
+      },
+      {
+        "test_id": "text_003",
+        "difficulty": "medium",
+        "prompt": "请比较唐三彩和宋代定窑白瓷的区别",
+        "response": "女，她是显性生活人。绝对有其各方面谁也不干净了.\n这些片曼引变中央由小园子但在远大学南枅斯种州一相階层到条,玤栈至歌页布括讨園觿章扊策命去出入故力",
+        "performance": {
+          "execution_time": 5.176630735397339,
+          "memory_usage": 0.015625,
+          "cpu_usage": 92.1,
+          "success": true,
+          "gpu_memory_usage": 0.0,
+          "peak_gpu_memory": 1018.95947265625
+        },
+        "quality": {
+          "keyword_coverage": 0.0,
+          "covered_keywords": [],
+          "response_length": 73,
+          "quality_score": 0.1095,
+          "has_error": false
+        }
+      }
+    ],
+    "multimodal_analysis": [
+      {
+        "test_id": "mm_001",
+        "difficulty": "medium",
+        "image_path": "E:\\fuye\\llm\\demo_images\\image1.png",
+        "prompt": "请分析这件古董的年代、材质和价值",
+        "response": "User:\n\n\n\n请作为专业的古董鉴定师，根据用户的要求：请分析这件古董的年代、材质和价值，对这件古董文物进行详细分析。请用中文提供专业的鉴定报告，包含：\n1. 文物类型和名称\n2. 年代判断\n3. 材质分析\n4. 工艺特点\n5. 真伪评估\n6. 保存状况\n7. 历史价值\n\n请直接提供分析结果，不要重复用户的问题。\nAssistant: 一，清晰地分析已有用途的古董, 可以考虑在品原文之前服务时，使用小绿模式, 对清晰了解实际底线被指导. 二，我们可以得到更多信息, 让任何人知道这等产品是出现在旧国放心社会故事中, 能帮助人们学习新角度, 不能只是测量性能, 还剪边案, 和其他相关的问题. 三，由于这个古董本却不显示歌手, 因此, 除非通过自己写出具体的文字, 就能大大提升成贵性, 不断加强文化献子. 的四, 是阅读理论, 数学, 分析数学, 以及图论, 一个好的方法为生态的表现, 上市竞争方式, 设计方法, 设计化方式, 设计层结构, 和其他所有其他的问题. 也是可以使用几个评价方法, 只要注意最后的标准, 而这些方法很完全推导出一种育育性, 决定影响需求(解决)育育性, 如以下列项):",
+        "performance": {
+          "execution_time": 25.389026403427124,
+          "memory_usage": 721.52734375,
+          "cpu_usage": 80.2,
+          "success": true,
+          "gpu_memory_usage": 0.0,
+          "peak_gpu_memory": 1407.18212890625
+        },
+        "quality": {
+          "keyword_coverage": 1.0,
+          "covered_keywords": [
+            "年代",
+            "材质",
+            "价值"
+          ],
+          "response_length": 502,
+          "quality_score": 1.0,
+          "has_error": false
+        }
+      }
+    ],
+    "reasoning_tasks": [
+      {
+        "test_id": "reason_001",
+        "difficulty": "hard",
+        "prompt": "如果一件瓷器底部有\"大清康熙年制\"款识，但釉色偏现代，胎质较轻，你会如何判断其真伪？",
+        "response": "这是一个很有趣的文化艺术问题。如果您有相关的图片，我可以为您提供更详细和准确的分析。",
+        "performance": {
+          "execution_time": 0.08740854263305664,
+          "memory_usage": 0.0,
+          "cpu_usage": 100.2,
+          "success": true,
+          "gpu_memory_usage": 0.0,
+          "peak_gpu_memory": 1012.919921875
+        },
+        "quality": {
+          "keyword_coverage": 0.0,
+          "covered_keywords": [],
+          "response_length": 42,
+          "quality_score": 0.063,
+          "has_error": false
+        }
+      }
+    ],
+    "performance_summary": {
+      "success_rate": 1.0,
+      "avg_execution_time": 7.207268857955933,
+      "max_execution_time": 25.389026403427124,
+      "min_execution_time": 0.08478093147277832,
+      "avg_memory_usage": 144.4421875,
+      "avg_cpu_usage": 92.33999999999999,
+      "avg_gpu_memory_usage": 0.0,
+      "max_peak_gpu_memory": 1407.18212890625
+    }
+  },
+  "comparison": {
+    "performance_comparison": {
+      "speed": {
+        "qwen3_avg_time": 36.56025767326355,
+        "smolvlm2_avg_time": 7.207268857955933,
+        "winner": "smolvlm2"
+      },
+      "memory_efficiency": {
+        "qwen3_avg_memory": 234.11328125,
+        "smolvlm2_avg_memory": 144.4421875,
+        "winner": "smolvlm2"
+      },
+      "success_rate": {
+        "qwen3_success_rate": 1.0,
+        "smolvlm2_success_rate": 1.0,
+        "winner": "smolvlm2"
+      }
+    },
+    "quality_comparison": {
+      "qwen3_avg_quality": 0.9611111111111111,
+      "smolvlm2_avg_quality": 0.29316666666666663,
+      "winner": "qwen3"
+    },
+    "capability_comparison": {
+      "text_analysis": {
+        "qwen3": true,
+        "smolvlm2": true
+      },
+      "multimodal_analysis": {
+        "qwen3": false,
+        "smolvlm2": true
+      },
+      "reasoning_tasks": {
+        "qwen3": true,
+        "smolvlm2": true
+      }
+    },
+    "recommendations": [
+      "smolvlm2在速度和内存效率方面都表现更好",
+      "SmolVLM2支持多模态分析，适合图文结合的古董鉴定任务",
+      "qwen3在文本分析质量方面表现更好",
+      "对于纯文本分析任务，可以根据速度和质量需求选择模型",
+      "对于图文结合的鉴定任务，建议使用SmolVLM2",
+      "建议根据具体使用场景和资源限制选择合适的模型"
+    ]
+  }
+}
