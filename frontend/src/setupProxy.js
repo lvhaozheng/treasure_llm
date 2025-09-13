@@ -13,8 +13,11 @@ module.exports = function(app) {
       agent: false,
       selfHandleResponse: false,
       buffer: false,
+      xfwd: true,
+      ws: true,
       headers: {
-        'Connection': 'keep-alive'
+        'Connection': 'keep-alive',
+        'Cache-Control': 'no-cache'
       },
       onError: (err, req, res) => {
         console.log('Proxy error:', err);

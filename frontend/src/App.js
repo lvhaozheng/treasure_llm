@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { flushSync } from 'react-dom';
 import ReactMarkdown from 'react-markdown';
 import './index.css';
 
@@ -68,7 +69,7 @@ function App() {
 
     setIsLoading(true);
     setError(null);
-    setReport(''); // 初始化空报告用于流式更新
+    setReport('🔍 AI正在分析中，请稍候...\n\n'); // 初始化报告并立即显示
 
     try {
       let url = '/api/v1/appraisal/stream';
@@ -138,8 +139,18 @@ function App() {
             
             try {
               const parsed = JSON.parse(data);
+              console.log('收到流式数据:', parsed); // 调试日志
               if (parsed.type === 'content' && parsed.text) {
-                setReport(prev => (prev || '') + parsed.text);
+                console.log('处理content类型数据:', parsed.text); // 调试日志
+                flushSync(() => {
+                  setReport(prev => {
+                    // 如果是第一次收到内容，清除初始消息
+                    if (prev && prev.includes('🔍 AI正在分析中')) {
+                      return parsed.text;
+                    }
+                    return (prev || '') + parsed.text;
+                  });
+                });
               } else if (parsed.type === 'structured_report' && parsed.data) {
                 // 处理结构化报告
                 setReport(prev => {
@@ -198,12 +209,24 @@ function App() {
                 });
               } else if (parsed.chunk) {
                 // 兼容旧格式
-                setReport(prev => (prev || '') + parsed.chunk);
+                setReport(prev => {
+                  // 如果是第一次收到内容，清除初始消息
+                  if (prev && prev.includes('🔍 AI正在分析中')) {
+                    return parsed.chunk;
+                  }
+                  return (prev || '') + parsed.chunk;
+                });
               }
             } catch (e) {
               // 如果不是JSON，直接作为文本块处理
               if (data && data !== '') {
-                setReport(prev => (prev || '') + data);
+                setReport(prev => {
+                  // 如果是第一次收到内容，清除初始消息
+                  if (prev && prev.includes('🔍 AI正在分析中')) {
+                    return data;
+                  }
+                  return (prev || '') + data;
+                });
               }
             }
           }
@@ -328,10 +351,16 @@ function App() {
         <div className="card">
           <div className="report-container">
             <h2 className="report-title">
-              📋 鉴赏报告
+              📋 鉴赏报告 {isLoading && <span style={{fontSize: '14px', color: '#666'}}>（正在生成中...）</span>}
             </h2>
             <div className="report-content">
               <ReactMarkdown>{report || '暂无分析结果'}</ReactMarkdown>
+              {isLoading && (
+                <div style={{marginTop: '20px', textAlign: 'center', color: '#666'}}>
+                  <div className="loading-spinner" style={{width: '20px', height: '20px', display: 'inline-block'}}></div>
+                  <span style={{marginLeft: '10px'}}>AI正在继续分析...</span>
+                </div>
+              )}
             </div>
           </div>
         </div>

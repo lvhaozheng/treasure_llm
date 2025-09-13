@@ -35,7 +35,8 @@ class AntiqueAgent:
     
     def __init__(self, openai_api_key: str = "", model_name: str = "gpt-3.5-turbo", 
                  temperature: float = 0.7, max_tokens: int = 1000,
-                 use_local_models: bool = True, clip_encoder=None, vector_db=None):
+                 use_local_models: bool = True, clip_encoder=None, vector_db=None,
+                 internvl3_5_client=None):
         """
         初始化古董分析代理
         
@@ -47,6 +48,7 @@ class AntiqueAgent:
             use_local_models: 是否使用本地模型（Qwen3 和 SmolVLM2）
             clip_encoder: CLIP编码器实例（用于图像编码）
             vector_db: 向量数据库实例（用于相似性搜索）
+            internvl3_5_client: 外部传入的InternVL3.5客户端实例（可选）
         """
         self.openai_api_key = openai_api_key
         self.model_name = model_name
@@ -68,7 +70,7 @@ class AntiqueAgent:
         
         # 本地模型客户端
         self.qwen3_client = None
-        self.internvl3_5_client = None
+        self.internvl3_5_client = internvl3_5_client  # 使用外部传入的实例
         
         try:
             self._init_components()
@@ -115,12 +117,15 @@ class AntiqueAgent:
             )
             logger.info("Qwen3 客户端初始化成功")
             
-            # 初始化 InternVL3_5 客户端（用于图像+文本）
-            self.internvl3_5_client = InternVL3_5Client(
-                max_tokens=self.max_tokens,
-                temperature=self.temperature
-            )
-            logger.info("InternVL3_5 客户端初始化成功")
+            # 初始化 InternVL3_5 客户端（如果未提供外部实例）
+            if self.internvl3_5_client is None:
+                self.internvl3_5_client = InternVL3_5Client(
+                    max_tokens=self.max_tokens,
+                    temperature=self.temperature
+                )
+                logger.info("InternVL3_5 客户端初始化成功")
+            else:
+                logger.info("使用外部传入的InternVL3_5客户端")
             
         except Exception as e:
             logger.error(f"本地模型初始化失败: {e}")

@@ -94,9 +94,11 @@ class InternVL3_5Client:
         
         # 设备配置
         if device == "auto":
-            self.device = "cuda" if CUDA_AVAILABLE else "cpu"
+            device_str = "cuda" if CUDA_AVAILABLE else "cpu"
+            self.device = torch.device(device_str)
         else:
-            self.device = device or ("cuda" if CUDA_AVAILABLE else "cpu")
+            device_str = device or ("cuda" if CUDA_AVAILABLE else "cpu")
+            self.device = torch.device(device_str)
         
         # 生成参数
         self.max_tokens = max_tokens
@@ -194,7 +196,7 @@ class InternVL3_5Client:
                 "trust_remote_code": True,
             }
             
-            if self.device == "cuda" and CUDA_AVAILABLE:
+            if self.device.type == "cuda" and CUDA_AVAILABLE:
                 model_kwargs["torch_dtype"] = torch.bfloat16
                 model_kwargs["device_map"] = "auto"
             else:
@@ -202,15 +204,38 @@ class InternVL3_5Client:
                 model_kwargs["torch_dtype"] = torch.float32
                 logger.info("使用CPU模式，设置torch_dtype为float32")
             
-            self.model = AutoModel.from_pretrained(
-                self.model_path,
-                **model_kwargs
-            )
-            
-            # 如果是CPU模式，手动移动模型到CPU
-            if self.device == "cpu":
-                self.model = self.model.to("cpu")
-                logger.info("模型已移动到CPU设备")
+            try:
+                self.model = AutoModel.from_pretrained(
+                    self.model_path,
+                    **model_kwargs
+                )
+                
+                # 如果是CPU模式，手动移动模型到CPU
+                if self.device.type == "cpu":
+                    self.model = self.model.to(self.device)
+                    logger.info("模型已移动到CPU设备")
+                
+            except torch.cuda.OutOfMemoryError as cuda_error:
+                if self.device.type == "cuda":
+                    logger.warning(f"CUDA内存不足，自动回退到CPU: {cuda_error}")
+                    # 清理CUDA缓存
+                    torch.cuda.empty_cache()
+                    
+                    # 切换到CPU并重新配置参数
+                    self.device = torch.device("cpu")
+                    model_kwargs["torch_dtype"] = torch.float32
+                    if "device_map" in model_kwargs:
+                        del model_kwargs["device_map"]
+                    
+                    logger.info("重新使用CPU模式加载模型...")
+                    self.model = AutoModel.from_pretrained(
+                        self.model_path,
+                        **model_kwargs
+                    )
+                    self.model = self.model.to(self.device)
+                    logger.info("模型已成功回退到CPU设备")
+                else:
+                    raise cuda_error
             
             # 设置评估模式
             self.model.eval()
@@ -271,11 +296,9 @@ class InternVL3_5Client:
                         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
                     ])
                     
-                    # 根据设备类型设置数据类型
-                    if self.device == "cuda" and CUDA_AVAILABLE:
-                        pixel_values = transform(image).unsqueeze(0).to(self.device, dtype=torch.bfloat16)
-                    else:
-                        pixel_values = transform(image).unsqueeze(0).to(self.device, dtype=torch.float32)
+                    # 根据模型的实际数据类型设置输入数据类型
+                    model_dtype = next(self.model.parameters()).dtype
+                    pixel_values = transform(image).unsqueeze(0).to(self.device, dtype=model_dtype)
                     logger.info(f"✅ 成功加载图像: {image_path}，设备: {self.device}")
                     
                 except Exception as img_e:

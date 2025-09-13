@@ -230,8 +230,37 @@ class ProjectStarter:
             self.print_status("Docker未安装或不可用", "ERROR")
             return False
     
+    def check_docker_containers_status(self) -> bool:
+        """检查Docker容器状态"""
+        try:
+            # 检查关键容器是否已运行
+            containers = ["milvus-etcd", "milvus-minio", "milvus-standalone", "ai-antique-redis"]
+            running_containers = []
+            
+            for container in containers:
+                result = subprocess.run(
+                    ["docker", "ps", "--filter", f"name={container}", "--filter", "status=running", "--format", "{{.Names}}"],
+                    capture_output=True, text=True
+                )
+                if result.returncode == 0 and container in result.stdout:
+                    running_containers.append(container)
+                    self.print_status(f"容器 {container} 已在运行", "SUCCESS")
+            
+            return len(running_containers) > 0
+        except Exception as e:
+            self.print_status(f"检查容器状态失败: {e}", "ERROR")
+            return False
+    
     def start_docker_dependencies(self) -> bool:
         """启动Docker依赖服务"""
+        self.print_status("检查Docker容器状态...", "DOCKER")
+        
+        # 检查容器是否已运行
+        if self.check_docker_containers_status():
+            self.print_status("检测到Docker容器已在运行，跳过启动步骤", "INFO")
+            self.docker_started = True
+            return True
+        
         self.print_status("启动Docker依赖服务...", "DOCKER")
         
         try:
@@ -394,6 +423,48 @@ class ProjectStarter:
             self.print_status(f"前端服务启动失败: {e}", "ERROR")
             return False
     
+    def initialize_rag_database(self) -> bool:
+        """初始化RAG知识库向量数据库"""
+        try:
+            self.print_status("开始初始化RAG知识库向量数据库...", "INFO")
+            
+            # 导入自动初始化模块
+            sys.path.append(os.path.join(os.getcwd(), 'ai_core', 'rag_knowledge_base'))
+            
+            try:
+                from auto_initializer import RAGAutoInitializer
+                
+                # 创建自动初始化器
+                initializer = RAGAutoInitializer()
+                
+                # 执行初始化
+                result = initializer.initialize()
+                
+                if result.get("success", False):
+                    inserted_count = result.get("inserted_count", 0)
+                    if inserted_count > 0:
+                        self.print_status(f"RAG知识库初始化成功，插入了 {inserted_count} 条新数据", "SUCCESS")
+                    else:
+                        self.print_status("RAG知识库初始化完成，没有新数据需要插入", "INFO")
+                    
+                    if result.get("failed_count", 0) > 0:
+                        self.print_status(f"有 {result['failed_count']} 条数据插入失败", "WARNING")
+                    
+                    return True
+                else:
+                    error_msg = result.get("error", "未知错误")
+                    self.print_status(f"RAG知识库初始化失败: {error_msg}", "ERROR")
+                    return False
+                    
+            except ImportError as e:
+                self.print_status(f"无法导入RAG自动初始化模块: {e}", "WARNING")
+                self.print_status("跳过RAG知识库初始化", "INFO")
+                return True  # 不阻止系统启动
+                
+        except Exception as e:
+            self.print_status(f"RAG知识库初始化过程中出现错误: {e}", "ERROR")
+            return False
+    
     def show_status(self):
         """显示服务状态"""
         print()
@@ -467,6 +538,10 @@ class ProjectStarter:
             # 检查关键服务端口
             self.wait_for_port("localhost", 6379, "Redis", 30)   # Redis
             self.wait_for_port("localhost", 19530, "Milvus", 60) # Milvus需要更长时间
+            
+            # 初始化RAG知识库向量数据库
+            if not self.initialize_rag_database():
+                self.print_status("RAG知识库初始化失败，但系统将继续启动", "WARNING")
             
             # 启动后端
             if not self.start_backend():

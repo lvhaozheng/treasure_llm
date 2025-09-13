@@ -65,6 +65,8 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key')
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['DATA_FOLDER'] = 'data'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB
+# 禁用响应缓冲以支持流式输出
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'bmp'}
 
 # 确保目录存在
@@ -82,7 +84,7 @@ def handle_stream_response(input_type, question=None, image_path=None):
                 logger.info(f"开始流式文本分析: {question[:100]}..." if len(question) > 100 else f"开始流式文本分析: {question}")
                 
                 # 发送开始信号
-                yield f"data: {{\"type\": \"start\", \"input_type\": \"text\"}}\n\n"
+                yield f"data: [START]\n\n"
                 
                 # 使用AI核心进行流式分析
                 if ai_core is None:
@@ -90,13 +92,33 @@ def handle_stream_response(input_type, question=None, image_path=None):
                     yield f"data: {{\"content\": \"\\n\\n这是一个基础响应，如需详细分析请稍后重试.\"}}\n\n"
                 else:
                     try:
+                        analysis_content = ""  # 初始化变量
                         for text_chunk in ai_core.analyze_antique_text_stream(question):
                             if text_chunk and text_chunk.strip():
-                                # 转义JSON字符串
-                                escaped_text = text_chunk.replace('"', '\\"').replace('\n', '\\n')
-                                yield f"data: {{\"content\": \"{escaped_text}\"}}\n\n"
+                                analysis_content += text_chunk
+                                # 立即发送内容块
+                                import json
+                                content_data = {"type": "content", "text": text_chunk}
+                                yield f"data: {json.dumps(content_data, ensure_ascii=False)}\n\n"
+                                import sys
+                                sys.stdout.flush()
+                        
+                        # 生成结构化报告
+                        structured_report = generate_structured_report(analysis_content, question, 'text')
+                        import json
+                        yield f"data: {{\"type\": \"structured_report\", \"data\": {json.dumps(structured_report, ensure_ascii=False)}}}\n\n"
+                        
                     except Exception as e:
-                        yield f"data: {{\"content\": \"分析过程中出现错误: {str(e)}\"}}\n\n"
+                        error_report = {
+                            "basic_reply": f"分析过程中出现错误: {str(e)}",
+                            "appraisal_report": {
+                                "item_name": "分析失败",
+                                "category": "错误",
+                                "error": str(e)
+                            }
+                        }
+                        import json
+                        yield f"data: {{\"type\": \"structured_report\", \"data\": {json.dumps(error_report, ensure_ascii=False)}}}\n\n"
                 
                 # 发送结束信号
                 yield f"data: [DONE]\n\n"
@@ -105,7 +127,7 @@ def handle_stream_response(input_type, question=None, image_path=None):
                 logger.info(f"开始流式图像分析: {question[:100]}..." if len(question) > 100 else f"开始流式图像分析: {question}")
                 
                 # 发送开始信号
-                yield f"data: {{\"type\": \"start\", \"input_type\": \"image\"}}\n\n"
+                yield f"data: [START]\n\n"
                 
                 # 使用AI核心进行流式图像分析
                 if ai_core is None:
@@ -115,8 +137,11 @@ def handle_stream_response(input_type, question=None, image_path=None):
                     try:
                         for text_chunk in ai_core.analyze_antique_image_stream(image_path, question):
                             if text_chunk and text_chunk.strip():
-                                escaped_text = text_chunk.replace('"', '\\"').replace('\n', '\\n')
-                                yield f"data: {{\"content\": \"{escaped_text}\"}}\n\n"
+                                import json
+                                content_data = {"type": "content", "text": text_chunk}
+                                yield f"data: {json.dumps(content_data, ensure_ascii=False)}\n\n"
+                                import sys
+                                sys.stdout.flush()
                     except Exception as e:
                         yield f"data: {{\"content\": \"分析过程中出现错误: {str(e)}\"}}\n\n"
                 
@@ -129,6 +154,9 @@ def handle_stream_response(input_type, question=None, image_path=None):
     
     return Response(generate_stream(), mimetype='text/event-stream; charset=utf-8', headers={
         'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+        'X-Accel-Buffering': 'no',  # 禁用nginx缓冲
+        'Transfer-Encoding': 'chunked',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Cache-Control'
     })
@@ -478,7 +506,7 @@ def appraisal_antique_stream():
         try:
             if input_type == 'text':
                 # 发送开始信号
-                yield f"data: {{\"type\": \"start\", \"input_type\": \"text\"}}\n\n"
+                yield f"data: [START]\n\n"
                 
                 # 使用AI核心进行流式分析
                 if ai_core is None:
@@ -514,14 +542,18 @@ def appraisal_antique_stream():
                 else:
                     # 使用AI核心的流式文本分析
                     try:
-                        # 收集所有分析内容
+                        # 实时流式处理 - 立即发送每个数据块
                         analysis_content = ""
+                        import json
                         for text_chunk in ai_core.analyze_antique_text_stream(question):
                             if text_chunk and text_chunk.strip():
                                 analysis_content += text_chunk
-                                # 发送内容块
-                                escaped_text = text_chunk.replace('"', '\\"').replace('\n', '\\n')
-                                yield f"data: {{\"type\": \"content\", \"text\": \"{escaped_text}\"}}\n\n"
+                                # 立即发送内容块
+                                import json
+                                content_data = {"type": "content", "text": text_chunk}
+                                yield f"data: {json.dumps(content_data, ensure_ascii=False)}\n\n"
+                                import sys
+                                sys.stdout.flush()  # 强制刷新缓冲区
                         
                         # 生成结构化报告
                         structured_report = generate_structured_report(analysis_content, question, 'text')
@@ -545,8 +577,7 @@ def appraisal_antique_stream():
                 
             else:  # input_type == 'image'
                 # 发送开始信号
-                filename = os.path.basename(image_path)
-                yield f"data: {{\"type\": \"start\", \"input_type\": \"image\", \"image_path\": \"{filename}\"}}\n\n"
+                yield f"data: [START]\n\n"
                 
                 # 使用AI核心进行流式图像分析
                 if ai_core is None:
@@ -582,14 +613,17 @@ def appraisal_antique_stream():
                 else:
                     # 使用AI核心的流式图像分析
                     try:
-                        # 收集所有分析内容
+                        # 实时流式处理 - 立即发送每个数据块
                         analysis_content = ""
+                        import json
                         for text_chunk in ai_core.analyze_antique_image_stream(image_path, question):
                             if text_chunk and text_chunk.strip():
                                 analysis_content += text_chunk
-                                # 发送内容块
-                                escaped_text = text_chunk.replace('"', '\\"').replace('\n', '\\n')
-                                yield f"data: {{\"type\": \"content\", \"text\": \"{escaped_text}\"}}\n\n"
+                                # 立即发送内容块
+                                content_data = {"type": "content", "text": text_chunk}
+                                yield f"data: {json.dumps(content_data, ensure_ascii=False)}\n\n"
+                                import sys
+                                sys.stdout.flush()  # 强制刷新缓冲区
                         
                         # 生成结构化报告
                         structured_report = generate_structured_report(analysis_content, question, 'image', image_path)
@@ -615,11 +649,16 @@ def appraisal_antique_stream():
             logger.error(f"流式古董鉴赏处理失败: {e}")
             yield f"data: {{\"type\": \"error\", \"message\": \"处理失败: {str(e)}\"}}\n\n"
     
-    return Response(generate_stream(input_type, question, image_path), mimetype='text/event-stream; charset=utf-8', headers={
-        'Cache-Control': 'no-cache',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Cache-Control'
-    })
+    return Response(generate_stream(input_type, question, image_path), 
+                   mimetype='text/event-stream; charset=utf-8', 
+                   headers={
+                       'Cache-Control': 'no-cache',
+                       'Connection': 'keep-alive',
+                       'X-Accel-Buffering': 'no',  # 禁用nginx缓冲
+                       'Transfer-Encoding': 'chunked',
+                       'Access-Control-Allow-Origin': '*',
+                       'Access-Control-Allow-Headers': 'Cache-Control'
+                   })
 
 def generate_structured_report(analysis_content, question, input_type, image_path=None):
     """生成结构化的鉴宝报告"""
@@ -705,7 +744,7 @@ def generate_structured_report(analysis_content, question, input_type, image_pat
         try:
             if input_type == 'text':
                 # 发送开始信号
-                yield f"data: {{\"type\": \"start\", \"input_type\": \"text\"}}\n\n"
+                yield f"data: [START]\n\n"
                 
                 # 使用AI核心进行流式分析
                 if ai_core is None:
@@ -746,9 +785,11 @@ def generate_structured_report(analysis_content, question, input_type, image_pat
                         for text_chunk in ai_core.analyze_antique_text_stream(question):
                             if text_chunk and text_chunk.strip():
                                 analysis_content += text_chunk
-                                # 发送内容块
-                                escaped_text = text_chunk.replace('"', '\\"').replace('\n', '\\n')
-                                yield f"data: {{\"type\": \"content\", \"text\": \"{escaped_text}\"}}\n\n"
+                                # 立即发送内容块
+                                content_data = {"type": "content", "text": text_chunk}
+                                yield f"data: {json.dumps(content_data, ensure_ascii=False)}\n\n"
+                                import sys
+                                sys.stdout.flush()
                         
                         # 生成结构化报告
                         structured_report = generate_structured_report(analysis_content, question, 'text')
@@ -772,8 +813,7 @@ def generate_structured_report(analysis_content, question, input_type, image_pat
                 
             else:  # input_type == 'image'
                 # 发送开始信号
-                filename = os.path.basename(image_path)
-                yield f"data: {{\"type\": \"start\", \"input_type\": \"image\", \"image_path\": \"{filename}\"}}\n\n"
+                yield f"data: [START]\n\n"
                 
                 # 使用AI核心进行流式图像分析
                 if ai_core is None:
@@ -814,9 +854,11 @@ def generate_structured_report(analysis_content, question, input_type, image_pat
                         for text_chunk in ai_core.analyze_antique_image_stream(image_path, question):
                             if text_chunk and text_chunk.strip():
                                 analysis_content += text_chunk
-                                # 发送内容块
-                                escaped_text = text_chunk.replace('"', '\\"').replace('\n', '\\n')
-                                yield f"data: {{\"type\": \"content\", \"text\": \"{escaped_text}\"}}\n\n"
+                                # 立即发送内容块
+                                content_data = {"type": "content", "text": text_chunk}
+                                yield f"data: {json.dumps(content_data, ensure_ascii=False)}\n\n"
+                                import sys
+                                sys.stdout.flush()  # 强制刷新缓冲区
                         
                         # 生成结构化报告
                         structured_report = generate_structured_report(analysis_content, question, 'image', image_path)
@@ -844,6 +886,9 @@ def generate_structured_report(analysis_content, question, input_type, image_pat
     
     return Response(generate_stream(input_type, question, image_path), mimetype='text/event-stream; charset=utf-8', headers={
         'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+        'X-Accel-Buffering': 'no',  # 禁用nginx缓冲
+        'Transfer-Encoding': 'chunked',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Cache-Control'
     })

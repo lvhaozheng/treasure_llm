@@ -116,19 +116,37 @@ goto :eof
 REM 注册CTRL+C处理
 if "%1"=="cleanup" goto cleanup
 
-REM 启动Docker依赖服务
+REM 检查Docker容器状态
 echo.
-echo %DOCKER% 启动Docker依赖服务...
+echo %DOCKER% 检查Docker容器状态...
 cd /d "%PROJECT_ROOT%"
-docker-compose up -d
-if errorlevel 1 (
-    echo %ERROR% Docker服务启动失败
-    call :cleanup
-    pause
-    exit /b 1
+
+REM 检查关键容器是否已运行
+set "CONTAINERS_RUNNING=0"
+for %%c in (milvus-etcd milvus-minio milvus-standalone ai-antique-redis) do (
+    docker ps --filter "name=%%c" --filter "status=running" --format "{{.Names}}" | findstr "%%c" >nul 2>&1
+    if not errorlevel 1 (
+        echo %SUCCESS% 容器 %%c 已在运行
+        set "CONTAINERS_RUNNING=1"
+    )
 )
-set "DOCKER_STARTED=1"
-echo %SUCCESS% Docker依赖服务启动成功
+
+REM 如果容器已运行，跳过启动
+if "%CONTAINERS_RUNNING%"=="1" (
+    echo %INFO% 检测到Docker容器已在运行，跳过启动步骤
+    set "DOCKER_STARTED=1"
+) else (
+    echo %DOCKER% 启动Docker依赖服务...
+    docker-compose up -d
+    if errorlevel 1 (
+        echo %ERROR% Docker服务启动失败
+        call :cleanup
+        pause
+        exit /b 1
+    )
+    set "DOCKER_STARTED=1"
+    echo %SUCCESS% Docker依赖服务启动成功
+)
 
 REM 等待服务就绪
 echo %INFO% 等待服务就绪...

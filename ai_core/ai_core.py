@@ -33,6 +33,7 @@ from clip_encoder import CLIPEncoder
 from vector_db import MilvusClient
 from langchain_agent import AntiqueAgent
 from models.client import InternVL3_5Client, Qwen3Client
+from optimized_query_processor import OptimizedQueryProcessor
 # 配置AI核心模块日志
 logger = get_ai_logger('ai_core')
 
@@ -150,6 +151,7 @@ class AICore:
         self.vector_db = None
         self.agent = None
         self.internvl3_5_client = None
+        self.optimized_query_processor = None
         
         # 初始化缓存系统
         self._init_cache()
@@ -187,7 +189,17 @@ class AICore:
             max_tokens=self.max_tokens,
             use_local_models=True,  # 启用本地模型支持
             clip_encoder=self.clip_encoder,  # 传入CLIP编码器
-            vector_db=self.vector_db  # 传入向量数据库
+            vector_db=self.vector_db,  # 传入向量数据库
+            internvl3_5_client=self.internvl3_5_client  # 传入已创建的InternVL3.5客户端
+        )
+        
+        # 初始化优化查询处理器（传入已创建的组件，避免重复初始化）
+        self.optimized_query_processor = OptimizedQueryProcessor(
+            similarity_threshold=0.6,  # 相似度阈值
+            top_k=5,
+            clip_encoder=self.clip_encoder,  # 复用已创建的CLIP编码器
+            milvus_client=self.vector_db,  # 复用已创建的Milvus客户端
+            internvl3_5_client=self.internvl3_5_client  # 复用已创建的InternVL3.5客户端
         )
         
         if not self.openai_api_key:
@@ -224,7 +236,7 @@ class AICore:
     def analyze_antique_image_stream(self, image: Union[str, Image.Image, np.ndarray], 
                                     description: str = ""):
         """
-        流式分析古董图像，使用InternVL3_5
+        流式分析古董图像，优先使用优化查询处理器进行智能判断
         
         Args:
             image: 图像输入（文件路径、PIL图像或numpy数组）
@@ -240,7 +252,21 @@ class AICore:
             else:
                 prompt = "请详细分析这张古董文物图片，包括文物类型、年代、材质、工艺特点、真伪评估、保存状况和历史价值。"
             
-            # 使用InternVL3_5进行真正的流式分析
+            # 首先尝试使用优化查询处理器的流式方法
+            if hasattr(self, 'optimized_query_processor') and self.optimized_query_processor:
+                logger.info("🔍 使用优化查询处理器进行流式智能分析")
+                try:
+                    # 使用优化查询处理器的流式方法
+                    for text_chunk in self.optimized_query_processor.process_image_text_query_stream(
+                        image=image,
+                        text_query=prompt
+                    ):
+                        yield text_chunk
+                    return
+                except Exception as e:
+                    logger.warning(f"优化查询处理器流式分析失败，回退到大模型: {e}")
+            
+            # 回退到InternVL3_5进行流式分析
             if self.internvl3_5_client and hasattr(self.internvl3_5_client, 'chat_about_antique_stream'):
                 logger.info("使用InternVL3_5进行流式古董图像分析")
                 # 使用真正的流式方法
@@ -279,7 +305,7 @@ class AICore:
             if not self.internvl3_5_client:
                 raise RuntimeError("InternVL3_5客户端未初始化")
             
-            # 1. 使用 InternVL3_5 生成鉴赏报告
+            # 1. 使用 InternVL3_5 生成鉴定报告
             internvl3_5_report = self.internvl3_5_client.generate_appraisal_report(
                 image=image,
                 user_query=description
@@ -349,6 +375,38 @@ class AICore:
             logger.error(f"基于InternVL3_5的古董图像分析失败: {e}")
             # 回退到LangChain方法
             return self._analyze_with_langchain(image, description)
+    
+    @log_method_call("analyze_antique_image_optimized")
+    def analyze_antique_image_optimized(self, image: Union[str, Image.Image, np.ndarray], 
+                                      description: str = "") -> Dict[str, Any]:
+        """
+        使用优化查询处理器分析古董图像
+        
+        Args:
+            image: 图像输入
+            description: 文本描述
+            
+        Returns:
+            优化的分析结果
+        """
+        try:
+            if not self.optimized_query_processor:
+                logger.warning("优化查询处理器未初始化，回退到标准分析")
+                return self.analyze_antique_image(image, description)
+            
+            # 使用优化查询处理器进行分析
+            result = self.optimized_query_processor.process_image_text_query(
+                image=image,
+                text_query=description
+            )
+            
+            logger.info("优化古董图像分析完成")
+            return result
+            
+        except Exception as e:
+            logger.error(f"优化古董图像分析失败: {e}")
+            # 回退到标准分析方法
+            return self.analyze_antique_image(image, description)
     
     def _analyze_with_langchain(self, image: Union[str, Image.Image, np.ndarray], 
                                description: str = "") -> Dict[str, Any]:

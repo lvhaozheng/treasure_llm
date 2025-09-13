@@ -1,0 +1,184 @@
+# 文物数据集生成器配置文件
+# Cultural Relic Dataset Generator Configuration
+
+# 模型配置
+model:
+  # 豆包文本生成模型配置
+  doubao_text:
+    model_name: "${DOUBAO_TEXT_MODEL}"
+    api_key: "${DOUBAO_API_KEY}"  # 豆包API密钥
+    base_url: "${DOUBAO_BASE_URL}"
+    timeout: 60
+    max_retries: 3
+    temperature: 0.7
+    max_tokens: 2000
+  
+  # 豆包图像生成模型配置
+  doubao_image:
+    model_name: "${DOUBAO_IMAGE_MODEL}"
+    api_key: "${DOUBAO_API_KEY}"  # 豆包API密钥
+    base_url: "${DOUBAO_BASE_URL}"
+    size: "1024x1024"
+    quality: "standard"
+    style: "natural"
+    timeout: 60
+    max_retries: 3
+
+# 数据生成配置
+generation:
+  # 要生成的朝代列表
+  dynasties:
+    - "商朝"  # SHANG
+    - "唐朝"  # TANG
+    - "宋朝"  # SONG
+    - "明朝"  # MING
+    - "清朝"  # QING
+  
+  # 每个朝代生成的文物数量
+  items_per_dynasty: 10
+  
+  # 文物类别权重 (影响生成概率)
+  category_weights:
+    青铜器: 0.2
+    陶器: 0.15
+    瓷器: 0.25
+    玉器: 0.15
+    漆器: 0.1
+    金银器: 0.1
+    丝织品: 0.05
+
+# 图像生成配置
+image:
+  # 图像尺寸
+  width: 1024
+  height: 1024
+  # 图像质量
+  quality: "high"
+  # 生成风格
+  style: "photorealistic"
+  # 背景设置
+  background: "museum_display"
+  # 光照设置
+  lighting: "professional"
+
+# 文本生成配置
+text:
+  # 描述详细程度
+  detail_level: "comprehensive"
+  # 语言
+  language: "zh"
+  # 专业术语使用
+  use_technical_terms: true
+  # 历史背景深度
+  historical_depth: "detailed"
+
+# 输出配置
+output:
+  # 输出目录
+  directory: "./cultural_relic_output"
+  # 文件命名格式
+  filename_format: "cultural_relic_dataset_{timestamp}"
+  # 保存格式
+  formats:
+    - "json"  # 原始数据集
+    - "rag"   # RAG格式
+  # 是否保存图像提示词
+  save_prompts: true
+  # 是否生成统计报告
+  generate_report: true
+
+# RAG系统配置
+rag:
+  # 向量编码器配置
+  encoder:
+    model_name: "clip-vit-base-patch32"
+    device: "auto"  # auto, cpu, cuda
+    batch_size: 32
+  
+  # Milvus数据库配置
+  milvus:
+    host: "localhost"
+    port: 19530
+    collection_name: "cultural_relics"
+    dimension: 512
+    index_type: "IVF_FLAT"
+    metric_type: "L2"
+
+# 质量控制配置
+quality:
+  # 历史准确性检查
+  historical_accuracy: true
+  # 文物描述完整性检查
+  description_completeness: true
+  # 图像提示词质量检查
+  prompt_quality_check: true
+  # 最小描述长度
+  min_description_length: 100
+  # 最大描述长度
+  max_description_length: 1000
+
+# 日志配置
+logging:
+  # 日志级别
+  level: "INFO"
+  # 日志文件
+  file: "cultural_relic_generator.log"
+  # 是否输出到控制台
+  console: true
+  # 日志格式
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# 高级配置
+advanced:
+  # 并发处理数量
+  concurrent_requests: 3
+  # 请求间隔(秒)
+  request_interval: 1.0
+  # 缓存生成结果
+  cache_results: true
+  # 缓存目录
+  cache_directory: "./cache"
+  # 数据验证严格程度
+  validation_strictness: "medium"  # strict, medium, loose
+
+# 朝代特定配置
+dynasty_specific:
+  夏朝:
+    focus_categories: ["青铜器", "陶器", "玉器"]
+    key_features: ["古朴", "原始", "礼器"]
+  
+  商朝:
+    focus_categories: ["青铜器", "甲骨文", "玉器", "白陶"]
+    key_features: ["饕餮纹", "夔龙纹", "庄重威严"]
+  
+  周朝:
+    focus_categories: ["青铜器", "玉器", "陶器", "丝织品"]
+    key_features: ["铭文", "分封制", "礼乐文化"]
+  
+  秦朝:
+    focus_categories: ["兵马俑", "青铜器", "石刻", "漆器"]
+    key_features: ["写实", "统一", "小篆"]
+  
+  汉朝:
+    focus_categories: ["漆器", "丝织品", "画像石", "青铜器", "陶器"]
+    key_features: ["神秘瑰丽", "吉祥寓意", "庄园生活"]
+  
+  唐朝:
+    focus_categories: ["唐三彩", "金银器", "瓷器", "书画", "佛教造像"]
+    key_features: ["富丽堂皇", "开放包容", "盛唐气象"]
+  
+  宋朝:
+    focus_categories: ["瓷器", "书画", "玉器", "漆器", "钱币"]
+    key_features: ["简约典雅", "文人画", "笔墨情趣"]
+  
+  元朝:
+    focus_categories: ["青花瓷", "玉器", "纺织品", "佛教造像"]
+    key_features: ["豪放", "游牧文化", "中原融合"]
+  
+  明朝:
+    focus_categories: ["瓷器", "家具", "漆器", "玉器", "珐琅器"]
+    key_features: ["浓艳", "简洁流畅", "文人审美"]
+  
+  清朝:
+    focus_categories: ["瓷器", "玉器", "珐琅器", "书画", "金属器"]
+    key_features: ["登峰造极", "气势恢宏", "中西融合"]

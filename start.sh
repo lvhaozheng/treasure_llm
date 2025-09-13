@@ -172,17 +172,42 @@ if ! command_exists curl; then
     log_warning "curl未安装，无法进行健康检查"
 fi
 
+# 检查Docker容器状态
+check_docker_containers() {
+    local containers=("milvus-etcd" "milvus-minio" "milvus-standalone" "ai-antique-redis")
+    local running_containers=0
+    
+    for container in "${containers[@]}"; do
+        if docker ps --filter "name=$container" --filter "status=running" --format "{{.Names}}" | grep -q "$container"; then
+            log_success "容器 $container 已在运行"
+            running_containers=$((running_containers + 1))
+        fi
+    done
+    
+    return $running_containers
+}
+
 # 启动Docker依赖服务
 echo
-log_docker "启动Docker依赖服务..."
+log_docker "检查Docker容器状态..."
 cd "$PROJECT_ROOT"
 
-if ! docker-compose up -d; then
-    log_error "Docker服务启动失败"
-    exit 1
+# 检查容器是否已运行
+check_docker_containers
+running_count=$?
+
+if [ $running_count -gt 0 ]; then
+    log_info "检测到Docker容器已在运行，跳过启动步骤"
+    DOCKER_STARTED=1
+else
+    log_docker "启动Docker依赖服务..."
+    if ! docker-compose up -d; then
+        log_error "Docker服务启动失败"
+        exit 1
+    fi
+    DOCKER_STARTED=1
+    log_success "Docker依赖服务启动成功"
 fi
-DOCKER_STARTED=1
-log_success "Docker依赖服务启动成功"
 
 # 等待服务就绪
 log_info "等待服务就绪..."
