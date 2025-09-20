@@ -1,0 +1,267 @@
+<svg width="1600" height="1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="frontendGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#61DAFB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#21A0C4;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="backendGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="aiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D84315;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dataGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9C27B0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6A1B9A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="infraGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#607D8B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#37474F;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="4" dy="4" stdDeviation="5" flood-color="#00000040"/>
+    </filter>
+    <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#2c3e50" />
+    </marker>
+    <marker id="dataArrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#E91E63" />
+    </marker>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1600" height="1080" fill="#f5f7fa"/>
+  
+  <!-- 标题 -->
+  <text x="800" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#2c3e50">🏗️ AI古董鉴定系统技术架构图</text>
+  
+  <!-- 前端层 -->
+  <g id="frontend-layer">
+    <rect x="50" y="80" width="1500" height="140" rx="15" fill="url(#frontendGradient)" filter="url(#shadow)"/>
+    <text x="800" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">🖥️ 前端展示层 (Frontend Presentation Layer)</text>
+    
+    <!-- React应用 -->
+    <rect x="100" y="130" width="200" height="70" rx="10" fill="#ffffff30"/>
+    <text x="200" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">⚛️ React 18</text>
+    <text x="200" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">• 组件化开发</text>
+    <text x="200" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">• 响应式UI</text>
+    
+    <!-- 状态管理 -->
+    <rect x="320" y="130" width="200" height="70" rx="10" fill="#ffffff30"/>
+    <text x="420" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">🔄 Redux Toolkit</text>
+    <text x="420" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">• 状态管理</text>
+    <text x="420" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">• 数据流控制</text>
+    
+    <!-- UI框架 -->
+    <rect x="540" y="130" width="200" height="70" rx="10" fill="#ffffff30"/>
+    <text x="640" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">🎨 Ant Design</text>
+    <text x="640" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">• 企业级UI组件</text>
+    <text x="640" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">• 设计语言</text>
+    
+    <!-- 路由 -->
+    <rect x="760" y="130" width="200" height="70" rx="10" fill="#ffffff30"/>
+    <text x="860" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">🛣️ React Router</text>
+    <text x="860" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">• 单页应用路由</text>
+    <text x="860" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">• 懒加载</text>
+    
+    <!-- HTTP客户端 -->
+    <rect x="980" y="130" width="200" height="70" rx="10" fill="#ffffff30"/>
+    <text x="1080" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">🌐 Axios</text>
+    <text x="1080" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">• HTTP请求</text>
+    <text x="1080" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">• 拦截器</text>
+    
+    <!-- 构建工具 -->
+    <rect x="1200" y="130" width="200" height="70" rx="10" fill="#ffffff30"/>
+    <text x="1300" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">⚡ Vite</text>
+    <text x="1300" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">• 快速构建</text>
+    <text x="1300" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">• 热更新</text>
+  </g>
+  
+
+  
+  <!-- 后端服务层 -->
+  <g id="backend-layer">
+    <rect x="50" y="250" width="1500" height="180" rx="15" fill="url(#backendGradient)" filter="url(#shadow)"/>
+    <text x="800" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">🔧 后端服务层 (Backend Service Layer)</text>
+    
+    <!-- Flask核心 -->
+    <rect x="100" y="300" width="180" height="110" rx="10" fill="#ffffff30"/>
+    <text x="190" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🐍 Flask 2.3</text>
+    <text x="190" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• RESTful API</text>
+    <text x="190" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 蓝图模块化</text>
+    <text x="190" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 中间件支持</text>
+    <text x="190" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 流式响应</text>
+    
+    <!-- 认证服务 -->
+    <rect x="300" y="300" width="180" height="110" rx="10" fill="#ffffff30"/>
+    <text x="390" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🔐 JWT认证</text>
+    <text x="390" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• Token管理</text>
+    <text x="390" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 权限控制</text>
+    <text x="390" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 会话管理</text>
+    <text x="390" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 安全验证</text>
+    
+    <!-- 文件服务 -->
+    <rect x="500" y="300" width="180" height="110" rx="10" fill="#ffffff30"/>
+    <text x="590" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">📁 文件服务</text>
+    <text x="590" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 图片上传</text>
+    <text x="590" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 格式验证</text>
+    <text x="590" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 存储管理</text>
+    <text x="590" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• CDN分发</text>
+    
+    <!-- 业务逻辑 -->
+    <rect x="700" y="300" width="180" height="110" rx="10" fill="#ffffff30"/>
+    <text x="790" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">⚙️ 业务逻辑</text>
+    <text x="790" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 古董管理</text>
+    <text x="790" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 用户管理</text>
+    <text x="790" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 搜索服务</text>
+    <text x="790" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 报告生成</text>
+    
+
+    
+    <!-- 监控日志 -->
+    <rect x="900" y="300" width="180" height="110" rx="10" fill="#ffffff30"/>
+    <text x="990" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">📊 监控日志</text>
+    <text x="990" y="345" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 性能监控</text>
+    <text x="990" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 错误追踪</text>
+    <text x="990" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 日志聚合</text>
+    <text x="990" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 告警通知</text>
+    
+
+  </g>
+  
+  <!-- AI服务层 -->
+  <g id="ai-layer">
+    <rect x="50" y="460" width="1500" height="200" rx="15" fill="url(#aiGradient)" filter="url(#shadow)"/>
+    <text x="800" y="490" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">🤖 AI智能服务层 (AI Intelligence Service Layer)</text>
+    
+    <!-- 多模态模型 -->
+    <rect x="80" y="510" width="200" height="130" rx="10" fill="#ffffff30"/>
+    <text x="180" y="535" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🧠 InternVL3.5</text>
+    <text x="180" y="555" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 多模态理解</text>
+    <text x="180" y="570" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 图文融合分析</text>
+    <text x="180" y="585" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 专业领域微调</text>
+    <text x="180" y="600" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 流式输出</text>
+    <text x="180" y="615" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• GPU加速推理</text>
+    <text x="180" y="630" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 模型量化优化</text>
+    
+    <!-- 语言模型 -->
+    <rect x="300" y="510" width="200" height="130" rx="10" fill="#ffffff30"/>
+    <text x="400" y="535" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">💬 Qwen3模型</text>
+    <text x="400" y="555" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 中文理解优化</text>
+    <text x="400" y="570" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 对话生成</text>
+    <text x="400" y="585" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 上下文记忆</text>
+    <text x="400" y="600" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 推理链思考</text>
+    <text x="400" y="615" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 知识问答</text>
+    <text x="400" y="630" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 文本生成</text>
+    
+    <!-- 视觉编码 -->
+    <rect x="520" y="510" width="200" height="130" rx="10" fill="#ffffff30"/>
+    <text x="620" y="535" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">👁️ CLIP编码器</text>
+    <text x="620" y="555" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 图像特征提取</text>
+    <text x="620" y="570" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 文本特征编码</text>
+    <text x="620" y="585" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 跨模态对齐</text>
+    <text x="620" y="600" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 向量化表示</text>
+    <text x="620" y="615" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 相似度计算</text>
+    <text x="620" y="630" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 批量处理</text>
+    
+    <!-- LangChain框架 -->
+    <rect x="740" y="510" width="200" height="130" rx="10" fill="#ffffff30"/>
+    <text x="840" y="535" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🔗 LangChain</text>
+    <text x="840" y="555" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• Agent框架</text>
+    <text x="840" y="570" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 工具链管理</text>
+    <text x="840" y="585" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 记忆管理</text>
+    <text x="840" y="600" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 提示工程</text>
+    <text x="840" y="725" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 链式调用</text>
+    <text x="840" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 回调处理</text>
+    
+    <!-- RAG系统 -->
+    <rect x="960" y="620" width="200" height="130" rx="10" fill="#ffffff30"/>
+    <text x="1060" y="645" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🔍 RAG检索</text>
+    <text x="1060" y="665" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 检索增强生成</text>
+    <text x="1060" y="680" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 上下文融合</text>
+    <text x="1060" y="695" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 知识库查询</text>
+    <text x="1060" y="710" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 相关性排序</text>
+    <text x="1060" y="725" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 动态检索</text>
+    <text x="1060" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 结果重排</text>
+    
+    <!-- 推理引擎 -->
+    <rect x="1180" y="620" width="200" height="130" rx="10" fill="#ffffff30"/>
+    <text x="1280" y="645" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">⚡ 推理引擎</text>
+    <text x="1280" y="665" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 模型加载管理</text>
+    <text x="1280" y="680" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 并发推理</text>
+    <text x="1280" y="695" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 资源调度</text>
+    <text x="1280" y="710" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 性能优化</text>
+    <text x="1280" y="725" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 错误恢复</text>
+    <text x="1280" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 监控统计</text>
+  </g>
+  
+  <!-- 数据存储层 -->
+  <g id="data-layer">
+    <rect x="50" y="690" width="1500" height="160" rx="15" fill="url(#dataGradient)" filter="url(#shadow)"/>
+    <text x="800" y="720" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">💾 数据存储层 (Data Storage Layer)</text>
+    
+    <!-- Milvus向量数据库 -->
+    <rect x="650" y="740" width="300" height="90" rx="10" fill="#ffffff30"/>
+    <text x="800" y="765" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">🔍 Milvus向量数据库</text>
+    <text x="800" y="785" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">• 高维向量存储与检索</text>
+    <text x="800" y="800" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">• 图像特征向量存储</text>
+    <text x="800" y="815" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">• 相似度搜索与匹配</text>
+  </g>
+  
+  <!-- 基础设施层 -->
+  <g id="infrastructure-layer">
+    <rect x="50" y="880" width="1500" height="160" rx="15" fill="url(#infraGradient)" filter="url(#shadow)"/>
+    <text x="800" y="910" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">🏗️ 基础设施层 (Infrastructure Layer)</text>
+    
+    <!-- Docker容器 -->
+    <rect x="500" y="930" width="250" height="90" rx="10" fill="#ffffff30"/>
+    <text x="625" y="955" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">🐳 Docker容器化</text>
+    <text x="625" y="975" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">• 应用容器化部署</text>
+    <text x="625" y="990" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">• 环境一致性保障</text>
+    <text x="625" y="1005" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">• 快速扩缩容</text>
+    
+    <!-- Nginx反向代理 -->
+    <rect x="800" y="930" width="250" height="90" rx="10" fill="#ffffff30"/>
+    <text x="925" y="955" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">🌐 Nginx代理</text>
+    <text x="925" y="975" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">• 反向代理服务</text>
+    <text x="925" y="990" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">• 负载均衡</text>
+    <text x="925" y="1005" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">• 静态资源服务</text>
+  </g>
+  
+  <!-- 数据流箭头 -->
+  <!-- 前端到API网关 -->
+  <line x1="800" y1="220" x2="800" y2="240" stroke="#2c3e50" stroke-width="4" marker-end="url(#arrowhead)"/>
+  
+  <!-- API网关到后端 -->
+  <line x1="800" y1="330" x2="800" y2="350" stroke="#2c3e50" stroke-width="4" marker-end="url(#arrowhead)"/>
+  
+  <!-- 后端到AI服务 -->
+  <line x1="800" y1="540" x2="800" y2="560" stroke="#2c3e50" stroke-width="4" marker-end="url(#arrowhead)"/>
+  
+  <!-- AI服务到数据层 -->
+  <line x1="800" y1="660" x2="800" y2="680" stroke="#2c3e50" stroke-width="4" marker-end="url(#arrowhead)"/>
+  
+  <!-- 数据层到基础设施 -->
+  <line x1="800" y1="850" x2="800" y2="870" stroke="#2c3e50" stroke-width="4" marker-end="url(#arrowhead)"/>
+  
+  <!-- 横向数据流 -->
+  <!-- AI服务内部连接 -->
+  <line x1="280" y1="685" x2="300" y2="685" stroke="#E91E63" stroke-width="2" marker-end="url(#dataArrow)"/>
+  <line x1="500" y1="685" x2="520" y2="685" stroke="#E91E63" stroke-width="2" marker-end="url(#dataArrow)"/>
+  <line x1="720" y1="685" x2="740" y2="685" stroke="#E91E63" stroke-width="2" marker-end="url(#dataArrow)"/>
+  <line x1="940" y1="685" x2="960" y2="685" stroke="#E91E63" stroke-width="2" marker-end="url(#dataArrow)"/>
+  <line x1="1160" y1="685" x2="1180" y2="685" stroke="#E91E63" stroke-width="2" marker-end="url(#dataArrow)"/>
+  
+  <!-- 数据存储层连接 -->
+  <line x1="300" y1="895" x2="320" y2="895" stroke="#9C27B0" stroke-width="2" marker-end="url(#dataArrow)"/>
+  <line x1="520" y1="895" x2="540" y2="895" stroke="#9C27B0" stroke-width="2" marker-end="url(#dataArrow)"/>
+  <line x1="740" y1="895" x2="760" y2="895" stroke="#9C27B0" stroke-width="2" marker-end="url(#dataArrow)"/>
+  <line x1="960" y1="895" x2="980" y2="895" stroke="#9C27B0" stroke-width="2" marker-end="url(#dataArrow)"/>
+  <line x1="1180" y1="895" x2="1200" y2="895" stroke="#9C27B0" stroke-width="2" marker-end="url(#dataArrow)"/>
+  
+  <!-- 技术栈标注 -->
+  <text x="1450" y="1180" text-anchor="end" font-family="Arial, sans-serif" font-size="12" fill="#7f8c8d">技术栈版本: React 18 • Flask 2.3 • Python 3.11 • Node.js 18</text>
+  
+</svg>

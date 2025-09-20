@@ -1,0 +1,317 @@
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 渐变定义 -->
+    <linearGradient id="dataGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3f2fd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bbdefb;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="encodeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f3e5f5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e1bee7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="storageGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5e8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e6c9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="queryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff3e0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffcc02;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="analysisGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffebee;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffcdd2;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 箭头标记 -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1200" height="800" fill="#fafafa" stroke="#e0e0e0" stroke-width="2"/>
+  
+  <!-- 标题 -->
+  <text x="600" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333">
+    RAG知识库使用流程图
+  </text>
+  
+  <!-- 阶段1: 数据准备 -->
+  <g id="data-preparation">
+    <rect x="50" y="80" width="200" height="120" rx="10" fill="url(#dataGrad)" stroke="#2196f3" stroke-width="2"/>
+    <text x="150" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1976d2">
+      1. 数据准备阶段
+    </text>
+    <text x="60" y="125" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • JSON格式数据集
+    </text>
+    <text x="60" y="145" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 古董图像文件
+    </text>
+    <text x="60" y="165" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 文本描述信息
+    </text>
+    <text x="60" y="185" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 元数据生成
+    </text>
+  </g>
+  
+  <!-- 阶段2: 向量编码 -->
+  <g id="vector-encoding">
+    <rect x="300" y="80" width="200" height="120" rx="10" fill="url(#encodeGrad)" stroke="#9c27b0" stroke-width="2"/>
+    <text x="400" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#7b1fa2">
+      2. 向量编码阶段
+    </text>
+    <text x="310" y="125" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • CLIP图像编码
+    </text>
+    <text x="310" y="145" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • CLIP文本编码
+    </text>
+    <text x="310" y="165" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 512维向量生成
+    </text>
+    <text x="310" y="185" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 批量处理优化
+    </text>
+  </g>
+  
+  <!-- 阶段3: 向量存储 -->
+  <g id="vector-storage">
+    <rect x="550" y="80" width="200" height="120" rx="10" fill="url(#storageGrad)" stroke="#4caf50" stroke-width="2"/>
+    <text x="650" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#388e3c">
+      3. 向量存储阶段
+    </text>
+    <text x="560" y="125" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • Milvus数据库
+    </text>
+    <text x="560" y="145" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 集合结构定义
+    </text>
+    <text x="560" y="165" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 批量插入向量
+    </text>
+    <text x="560" y="185" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 索引创建优化
+    </text>
+  </g>
+  
+  <!-- 查询输入 -->
+  <g id="query-input">
+    <rect x="50" y="250" width="150" height="80" rx="10" fill="url(#queryGrad)" stroke="#ff9800" stroke-width="2"/>
+    <text x="125" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#f57c00">
+      用户查询输入
+    </text>
+    <text x="60" y="295" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 古董图像
+    </text>
+    <text x="60" y="315" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 文本描述
+    </text>
+  </g>
+  
+  <!-- 阶段4: 智能检索 -->
+  <g id="intelligent-retrieval">
+    <rect x="250" y="250" width="300" height="200" rx="10" fill="url(#queryGrad)" stroke="#ff9800" stroke-width="2"/>
+    <text x="400" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#f57c00">
+      4. 智能检索阶段
+    </text>
+    
+    <!-- 子步骤4.1 -->
+    <rect x="260" y="290" width="130" height="60" rx="5" fill="#fff8e1" stroke="#ffc107" stroke-width="1"/>
+    <text x="325" y="310" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ff8f00">
+      4.1 向量编码
+    </text>
+    <text x="270" y="325" font-family="Arial, sans-serif" font-size="10" fill="#333">
+      CLIP编码查询图像
+    </text>
+    <text x="270" y="340" font-family="Arial, sans-serif" font-size="10" fill="#333">
+      生成512维向量
+    </text>
+    
+    <!-- 子步骤4.2 -->
+    <rect x="410" y="290" width="130" height="60" rx="5" fill="#fff8e1" stroke="#ffc107" stroke-width="1"/>
+    <text x="475" y="310" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ff8f00">
+      4.2 相似度检索
+    </text>
+    <text x="420" y="325" font-family="Arial, sans-serif" font-size="10" fill="#333">
+      Milvus向量搜索
+    </text>
+    <text x="420" y="340" font-family="Arial, sans-serif" font-size="10" fill="#333">
+      Top-K相似结果
+    </text>
+    
+    <!-- 子步骤4.3 -->
+    <rect x="260" y="370" width="280" height="60" rx="5" fill="#fff8e1" stroke="#ffc107" stroke-width="1"/>
+    <text x="400" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#ff8f00">
+      4.3 相似度判断与策略选择
+    </text>
+    <text x="270" y="405" font-family="Arial, sans-serif" font-size="10" fill="#333">
+      相似度 ≥ 0.7 ? 元数据增强分析 : 标准分析
+    </text>
+    <text x="270" y="420" font-family="Arial, sans-serif" font-size="10" fill="#333">
+      构建增强上下文或直接分析
+    </text>
+  </g>
+  
+  <!-- 阶段5: 智能分析 -->
+  <g id="intelligent-analysis">
+    <rect x="600" y="250" width="250" height="200" rx="10" fill="url(#analysisGrad)" stroke="#f44336" stroke-width="2"/>
+    <text x="725" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#d32f2f">
+      5. 智能分析阶段
+    </text>
+    
+    <!-- 增强分析路径 -->
+    <rect x="610" y="290" width="110" height="70" rx="5" fill="#ffebee" stroke="#e57373" stroke-width="1"/>
+    <text x="665" y="310" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#c62828">
+      增强分析路径
+    </text>
+    <text x="620" y="325" font-family="Arial, sans-serif" font-size="9" fill="#333">
+      • 元数据上下文
+    </text>
+    <text x="620" y="340" font-family="Arial, sans-serif" font-size="9" fill="#333">
+      • 参考古董信息
+    </text>
+    <text x="620" y="355" font-family="Arial, sans-serif" font-size="9" fill="#333">
+      • 增强型prompt
+    </text>
+    
+    <!-- 标准分析路径 -->
+    <rect x="730" y="290" width="110" height="70" rx="5" fill="#ffebee" stroke="#e57373" stroke-width="1"/>
+    <text x="785" y="310" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#c62828">
+      标准分析路径
+    </text>
+    <text x="740" y="325" font-family="Arial, sans-serif" font-size="9" fill="#333">
+      • 直接分析
+    </text>
+    <text x="740" y="340" font-family="Arial, sans-serif" font-size="9" fill="#333">
+      • 基础prompt
+    </text>
+    <text x="740" y="355" font-family="Arial, sans-serif" font-size="9" fill="#333">
+      • 通用鉴定
+    </text>
+    
+    <!-- InternVL3.5模型 -->
+    <rect x="610" y="380" width="230" height="60" rx="5" fill="#ffcdd2" stroke="#f44336" stroke-width="1"/>
+    <text x="725" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#b71c1c">
+      InternVL3.5 多模态大模型
+    </text>
+    <text x="620" y="415" font-family="Arial, sans-serif" font-size="10" fill="#333">
+      • 图像理解 • 文本生成 • 专业鉴定
+    </text>
+    <text x="620" y="430" font-family="Arial, sans-serif" font-size="10" fill="#333">
+      • 流式输出 • 实时反馈
+    </text>
+  </g>
+  
+  <!-- 结果输出 -->
+  <g id="result-output">
+    <rect x="900" y="250" width="200" height="200" rx="10" fill="#e8f5e8" stroke="#4caf50" stroke-width="2"/>
+    <text x="1000" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#388e3c">
+      6. 结果输出
+    </text>
+    <text x="910" y="300" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 鉴定分析报告
+    </text>
+    <text x="910" y="320" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 相似古董信息
+    </text>
+    <text x="910" y="340" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 置信度评分
+    </text>
+    <text x="910" y="360" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 处理时间统计
+    </text>
+    <text x="910" y="380" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 流式实时输出
+    </text>
+    <text x="910" y="400" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • JSON结构化数据
+    </text>
+    <text x="910" y="420" font-family="Arial, sans-serif" font-size="12" fill="#333">
+      • 性能监控指标
+    </text>
+  </g>
+  
+  <!-- 数据流箭头 -->
+  <!-- 数据准备 → 向量编码 -->
+  <line x1="250" y1="140" x2="300" y2="140" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 向量编码 → 向量存储 -->
+  <line x1="500" y1="140" x2="550" y2="140" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 用户查询 → 智能检索 -->
+  <line x1="200" y1="290" x2="250" y2="290" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 向量存储 → 智能检索 -->
+  <path d="M 650 200 Q 650 225 400 225 Q 400 250 400 250" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- 智能检索 → 智能分析 -->
+  <line x1="550" y1="350" x2="600" y2="350" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 智能分析 → 结果输出 -->
+  <line x1="850" y1="350" x2="900" y2="350" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- 关键技术标注 -->
+  <g id="tech-labels">
+    <text x="50" y="500" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">
+      关键技术组件:
+    </text>
+    <text x="50" y="525" font-family="Arial, sans-serif" font-size="12" fill="#666">
+      • RAGEncoder: 向量编码器，支持图像和文本的CLIP编码
+    </text>
+    <text x="50" y="545" font-family="Arial, sans-serif" font-size="12" fill="#666">
+      • MilvusStorage: 向量数据库存储管理器，支持高效检索
+    </text>
+    <text x="50" y="565" font-family="Arial, sans-serif" font-size="12" fill="#666">
+      • OptimizedQueryProcessor: 智能查询处理器，实现两阶段检索策略
+    </text>
+    <text x="50" y="585" font-family="Arial, sans-serif" font-size="12" fill="#666">
+      • CLIPEncoder: 多模态编码器，统一图像和文本向量空间
+    </text>
+    <text x="50" y="605" font-family="Arial, sans-serif" font-size="12" fill="#666">
+      • InternVL3.5Client: 多模态大语言模型，专业古董鉴定分析
+    </text>
+  </g>
+  
+  <!-- 性能指标 -->
+  <g id="performance-metrics">
+    <text x="650" y="500" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">
+      性能指标:
+    </text>
+    <text x="650" y="525" font-family="Arial, sans-serif" font-size="12" fill="#666">
+      • 向量编码: ~0.15s (CLIP模型)
+    </text>
+    <text x="650" y="545" font-family="Arial, sans-serif" font-size="12" fill="#666">
+      • 相似度检索: ~0.08s (Milvus数据库)
+    </text>
+    <text x="650" y="565" font-family="Arial, sans-serif" font-size="12" fill="#666">
+      • 大模型推理: ~2.1s (InternVL3.5)
+    </text>
+    <text x="650" y="585" font-family="Arial, sans-serif" font-size="12" fill="#666">
+      • 总处理时间: ~2.3s (端到端)
+    </text>
+    <text x="650" y="605" font-family="Arial, sans-serif" font-size="12" fill="#666">
+      • 相似度阈值: 0.7 (可配置)
+    </text>
+  </g>
+  
+  <!-- 决策节点标注 -->
+  <g id="decision-node">
+    <ellipse cx="400" cy="480" rx="80" ry="30" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+    <text x="400" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#f57c00">
+      相似度判断
+    </text>
+    <text x="400" y="490" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">
+      ≥ 0.7 ?
+    </text>
+  </g>
+  
+  <!-- 决策箭头 -->
+  <path d="M 400 430 Q 400 455 400 450" stroke="#ff9800" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- 版本信息 -->
+  <text x="1050" y="780" font-family="Arial, sans-serif" font-size="10" fill="#999">
+    RAG Workflow v1.0 - 2025
+  </text>
+</svg>

@@ -1,0 +1,111 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="headerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="frontendGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#61DAFB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#21A0C4;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="backendGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#388E3C;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="aiGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F57C00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dbGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#9C27B0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7B1FA2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="modelGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E91E63;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C2185B;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2"/>
+  
+  <!-- Title -->
+  <rect x="20" y="20" width="760" height="50" fill="url(#headerGradient)" rx="8"/>
+  <text x="400" y="50" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="20" font-weight="bold">AI古董鉴定系统 - 系统架构</text>
+  
+  <!-- Frontend Layer -->
+  <rect x="40" y="90" width="720" height="80" fill="url(#frontendGradient)" rx="6" opacity="0.9"/>
+  <text x="60" y="115" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">前端界面 (Frontend)</text>
+  <text x="80" y="135" fill="white" font-family="Arial, sans-serif" font-size="12">• React应用</text>
+  <text x="200" y="135" fill="white" font-family="Arial, sans-serif" font-size="12">• 图像上传组件</text>
+  <text x="340" y="135" fill="white" font-family="Arial, sans-serif" font-size="12">• 结果展示组件</text>
+  <text x="480" y="135" fill="white" font-family="Arial, sans-serif" font-size="12">• 用户交互界面</text>
+  <text x="80" y="155" fill="white" font-family="Arial, sans-serif" font-size="12">• 响应式设计</text>
+  <text x="200" y="155" fill="white" font-family="Arial, sans-serif" font-size="12">• 实时数据展示</text>
+  
+  <!-- Backend Layer -->
+  <rect x="40" y="180" width="720" height="80" fill="url(#backendGradient)" rx="6" opacity="0.9"/>
+  <text x="60" y="205" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">后端API (Backend)</text>
+  <text x="80" y="225" fill="white" font-family="Arial, sans-serif" font-size="12">• Flask Web服务</text>
+  <text x="220" y="225" fill="white" font-family="Arial, sans-serif" font-size="12">• 图像处理服务</text>
+  <text x="360" y="225" fill="white" font-family="Arial, sans-serif" font-size="12">• 报告格式化服务</text>
+  <text x="520" y="225" fill="white" font-family="Arial, sans-serif" font-size="12">• RESTful API</text>
+  <text x="80" y="245" fill="white" font-family="Arial, sans-serif" font-size="12">• 用户管理</text>
+  <text x="220" y="245" fill="white" font-family="Arial, sans-serif" font-size="12">• 文件上传处理</text>
+  <text x="360" y="245" fill="white" font-family="Arial, sans-serif" font-size="12">• 数据验证</text>
+  
+  <!-- AI Core Layer -->
+  <rect x="40" y="270" width="720" height="80" fill="url(#aiGradient)" rx="6" opacity="0.9"/>
+  <text x="60" y="295" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">核心AI引擎 (ai_core)</text>
+  <text x="80" y="315" fill="white" font-family="Arial, sans-serif" font-size="12">• AICore 主控制器</text>
+  <text x="240" y="315" fill="white" font-family="Arial, sans-serif" font-size="12">• 优化查询处理器</text>
+  <text x="400" y="315" fill="white" font-family="Arial, sans-serif" font-size="12">• 多模态模型客户端</text>
+  <text x="580" y="315" fill="white" font-family="Arial, sans-serif" font-size="12">• RAG知识库</text>
+  <text x="80" y="335" fill="white" font-family="Arial, sans-serif" font-size="12">• 流式处理</text>
+  <text x="240" y="335" fill="white" font-family="Arial, sans-serif" font-size="12">• 智能路由</text>
+  <text x="400" y="335" fill="white" font-family="Arial, sans-serif" font-size="12">• 缓存优化</text>
+  
+  <!-- Vector Database Layer -->
+  <rect x="40" y="360" width="720" height="80" fill="url(#dbGradient)" rx="6" opacity="0.9"/>
+  <text x="60" y="385" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">向量数据库层 (Vector Database)</text>
+  <text x="80" y="405" fill="white" font-family="Arial, sans-serif" font-size="12">• Milvus向量数据库</text>
+  <text x="260" y="405" fill="white" font-family="Arial, sans-serif" font-size="12">• CLIP编码器</text>
+  <text x="400" y="405" fill="white" font-family="Arial, sans-serif" font-size="12">• 相似度检索引擎</text>
+  <text x="580" y="405" fill="white" font-family="Arial, sans-serif" font-size="12">• 向量索引</text>
+  <text x="80" y="425" fill="white" font-family="Arial, sans-serif" font-size="12">• 批量操作</text>
+  <text x="260" y="425" fill="white" font-family="Arial, sans-serif" font-size="12">• 特征提取</text>
+  <text x="400" y="425" fill="white" font-family="Arial, sans-serif" font-size="12">• 相似度计算</text>
+  
+  <!-- Model Services Layer -->
+  <rect x="40" y="450" width="720" height="80" fill="url(#modelGradient)" rx="6" opacity="0.9"/>
+  <text x="60" y="475" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">模型服务层 (Model Services)</text>
+  <text x="80" y="495" fill="white" font-family="Arial, sans-serif" font-size="12">• InternVL3.5多模态模型</text>
+  <text x="280" y="495" fill="white" font-family="Arial, sans-serif" font-size="12">• CLIP视觉编码器</text>
+  <text x="480" y="495" fill="white" font-family="Arial, sans-serif" font-size="12">• 古董专家Agent</text>
+  <text x="80" y="515" fill="white" font-family="Arial, sans-serif" font-size="12">• 图像理解</text>
+  <text x="280" y="515" fill="white" font-family="Arial, sans-serif" font-size="12">• 多模态编码</text>
+  <text x="480" y="515" fill="white" font-family="Arial, sans-serif" font-size="12">• 专业问答</text>
+  
+  <!-- Data Flow Arrows -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+  
+  <!-- Arrows between layers -->
+  <line x1="400" y1="170" x2="400" y2="180" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="400" y1="260" x2="400" y2="270" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="400" y1="350" x2="400" y2="360" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="400" y1="440" x2="400" y2="450" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Side annotations -->
+  <text x="770" y="130" fill="#666" font-family="Arial, sans-serif" font-size="10" text-anchor="end">用户界面</text>
+  <text x="770" y="220" fill="#666" font-family="Arial, sans-serif" font-size="10" text-anchor="end">API服务</text>
+  <text x="770" y="310" fill="#666" font-family="Arial, sans-serif" font-size="10" text-anchor="end">AI处理</text>
+  <text x="770" y="400" fill="#666" font-family="Arial, sans-serif" font-size="10" text-anchor="end">数据存储</text>
+  <text x="770" y="490" fill="#666" font-family="Arial, sans-serif" font-size="10" text-anchor="end">模型推理</text>
+  
+  <!-- Footer -->
+  <text x="400" y="580" text-anchor="middle" fill="#666" font-family="Arial, sans-serif" font-size="12">数据流向：用户请求 → API处理 → AI分析 → 向量检索 → 模型推理 → 结果返回</text>
+</svg>

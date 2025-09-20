@@ -1,0 +1,407 @@
+<svg width="1800" height="1400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cloudGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498DB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980B9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="k8sGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#326CE5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E3A8A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="appGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dataGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="aiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="monitorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EF4444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DC2626;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="networkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6B7280;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4B5563;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="4" dy="4" stdDeviation="6" flood-color="#00000050"/>
+    </filter>
+    <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#2c3e50" />
+    </marker>
+    <marker id="networkArrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3B82F6" />
+    </marker>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1800" height="1400" fill="#f8fafc"/>
+  
+  <!-- 标题 -->
+  <text x="900" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#1e293b">🚀 AI古董鉴定系统部署架构图</text>
+  
+  <!-- 云平台层 -->
+  <g id="cloud-layer">
+    <rect x="50" y="80" width="1700" height="100" rx="20" fill="url(#cloudGradient)" filter="url(#shadow)"/>
+    <text x="900" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white">☁️ 云平台基础设施 (Cloud Infrastructure)</text>
+    
+    <!-- 云服务提供商 -->
+    <rect x="150" y="130" width="200" height="30" rx="8" fill="#ffffff30"/>
+    <text x="250" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">🌐 阿里云/腾讯云</text>
+    
+    <rect x="400" y="130" width="200" height="30" rx="8" fill="#ffffff30"/>
+    <text x="500" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">🔒 VPC网络隔离</text>
+    
+    <rect x="650" y="130" width="200" height="30" rx="8" fill="#ffffff30"/>
+    <text x="750" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">🛡️ 安全组配置</text>
+    
+    <rect x="900" y="130" width="200" height="30" rx="8" fill="#ffffff30"/>
+    <text x="1000" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">📊 弹性伸缩</text>
+    
+    <rect x="1150" y="130" width="200" height="30" rx="8" fill="#ffffff30"/>
+    <text x="1250" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">💾 云存储服务</text>
+    
+    <rect x="1400" y="130" width="200" height="30" rx="8" fill="#ffffff30"/>
+    <text x="1500" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">🌍 CDN加速</text>
+  </g>
+  
+  <!-- 负载均衡层 -->
+  <g id="lb-layer">
+    <rect x="50" y="210" width="1700" height="80" rx="15" fill="url(#networkGradient)" filter="url(#shadow)"/>
+    <text x="900" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white">⚖️ 负载均衡与网关层 (Load Balancer & Gateway)</text>
+    
+    <rect x="200" y="260" width="180" height="20" rx="5" fill="#ffffff30"/>
+    <text x="290" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">🌐 Nginx Ingress</text>
+    
+    <rect x="420" y="260" width="180" height="20" rx="5" fill="#ffffff30"/>
+    <text x="510" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">🔒 SSL终端</text>
+    
+    <rect x="640" y="260" width="180" height="20" rx="5" fill="#ffffff30"/>
+    <text x="730" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">🚪 API网关</text>
+    
+    <rect x="860" y="260" width="180" height="20" rx="5" fill="#ffffff30"/>
+    <text x="950" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">🛡️ 防火墙</text>
+    
+    <rect x="1080" y="260" width="180" height="20" rx="5" fill="#ffffff30"/>
+    <text x="1170" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">📊 流量监控</text>
+    
+    <rect x="1300" y="260" width="180" height="20" rx="5" fill="#ffffff30"/>
+    <text x="1390" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">🔄 健康检查</text>
+  </g>
+  
+  <!-- Kubernetes集群层 -->
+  <g id="k8s-layer">
+    <rect x="50" y="320" width="1700" height="200" rx="15" fill="url(#k8sGradient)" filter="url(#shadow)"/>
+    <text x="900" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">☸️ Kubernetes容器编排层 (Container Orchestration)</text>
+    
+    <!-- Master节点 -->
+    <rect x="100" y="370" width="250" height="130" rx="10" fill="#ffffff20" stroke="#ffffff60" stroke-width="2"/>
+    <text x="225" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">🎛️ Master节点集群</text>
+    
+    <rect x="120" y="410" width="100" height="25" rx="5" fill="#ffffff30"/>
+    <text x="170" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">API Server</text>
+    
+    <rect x="230" y="410" width="100" height="25" rx="5" fill="#ffffff30"/>
+    <text x="280" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">etcd集群</text>
+    
+    <rect x="120" y="445" width="100" height="25" rx="5" fill="#ffffff30"/>
+    <text x="170" y="462" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Scheduler</text>
+    
+    <rect x="230" y="445" width="100" height="25" rx="5" fill="#ffffff30"/>
+    <text x="280" y="462" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Controller</text>
+    
+    <!-- Worker节点1 - 前端服务 -->
+    <rect x="380" y="370" width="250" height="130" rx="10" fill="#ffffff20" stroke="#ffffff60" stroke-width="2"/>
+    <text x="505" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">🖥️ 前端服务节点</text>
+    
+    <rect x="400" y="410" width="100" height="25" rx="5" fill="#61DAFB30"/>
+    <text x="450" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">React应用</text>
+    
+    <rect x="510" y="410" width="100" height="25" rx="5" fill="#61DAFB30"/>
+    <text x="560" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Nginx静态</text>
+    
+    <rect x="400" y="445" width="210" height="25" rx="5" fill="#ffffff30"/>
+    <text x="505" y="462" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">CPU: 2核 | 内存: 4GB | 副本: 3</text>
+    
+    <!-- Worker节点2 - 后端服务 -->
+    <rect x="660" y="370" width="250" height="130" rx="10" fill="#ffffff20" stroke="#ffffff60" stroke-width="2"/>
+    <text x="785" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">🔧 后端服务节点</text>
+    
+    <rect x="680" y="410" width="100" height="25" rx="5" fill="#4CAF5030"/>
+    <text x="730" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Flask API</text>
+    
+    <rect x="790" y="410" width="100" height="25" rx="5" fill="#4CAF5030"/>
+    <text x="840" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">业务逻辑</text>
+    
+    <rect x="680" y="445" width="210" height="25" rx="5" fill="#ffffff30"/>
+    <text x="785" y="462" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">CPU: 4核 | 内存: 8GB | 副本: 5</text>
+    
+    <!-- Worker节点3 - AI服务 -->
+    <rect x="940" y="370" width="250" height="130" rx="10" fill="#ffffff20" stroke="#ffffff60" stroke-width="2"/>
+    <text x="1065" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">🤖 AI推理节点</text>
+    
+    <rect x="960" y="410" width="100" height="25" rx="5" fill="#FF6B3530"/>
+    <text x="1010" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">InternVL3.5</text>
+    
+    <rect x="1070" y="410" width="100" height="25" rx="5" fill="#FF6B3530"/>
+    <text x="1120" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">CLIP模型</text>
+    
+    <rect x="960" y="445" width="210" height="25" rx="5" fill="#ffffff30"/>
+    <text x="1065" y="462" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">GPU: V100 | 内存: 32GB | 副本: 2</text>
+    
+    <!-- Worker节点4 - 数据服务 -->
+    <rect x="1220" y="370" width="250" height="130" rx="10" fill="#ffffff20" stroke="#ffffff60" stroke-width="2"/>
+    <text x="1345" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">💾 数据服务节点</text>
+    
+    <rect x="1240" y="410" width="100" height="25" rx="5" fill="#9C27B030"/>
+    <text x="1290" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">PostgreSQL</text>
+    
+    <rect x="1350" y="410" width="100" height="25" rx="5" fill="#9C27B030"/>
+    <text x="1400" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Milvus</text>
+    
+    <rect x="1240" y="445" width="210" height="25" rx="5" fill="#ffffff30"/>
+    <text x="1345" y="462" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">CPU: 8核 | 内存: 16GB | SSD: 1TB</text>
+    
+    <!-- 监控节点 -->
+    <rect x="1500" y="370" width="200" height="130" rx="10" fill="#ffffff20" stroke="#ffffff60" stroke-width="2"/>
+    <text x="1600" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">📊 监控节点</text>
+    
+    <rect x="1520" y="410" width="80" height="25" rx="5" fill="#EF444430"/>
+    <text x="1560" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Prometheus</text>
+    
+    <rect x="1610" y="410" width="70" height="25" rx="5" fill="#EF444430"/>
+    <text x="1645" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Grafana</text>
+    
+    <rect x="1520" y="445" width="160" height="25" rx="5" fill="#ffffff30"/>
+    <text x="1600" y="462" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">CPU: 2核 | 内存: 4GB</text>
+  </g>
+  
+  <!-- 应用服务层 -->
+  <g id="app-layer">
+    <rect x="50" y="550" width="1700" height="180" rx="15" fill="url(#appGradient)" filter="url(#shadow)"/>
+    <text x="900" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">🚀 应用服务层 (Application Services)</text>
+    
+    <!-- 前端应用 -->
+    <rect x="100" y="600" width="200" height="110" rx="10" fill="#ffffff30"/>
+    <text x="200" y="625" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🖥️ 前端应用</text>
+    <text x="200" y="645" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• React SPA</text>
+    <text x="200" y="660" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• Nginx服务</text>
+    <text x="200" y="675" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 静态资源</text>
+    <text x="200" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 80/443</text>
+    
+    <!-- API服务 -->
+    <rect x="320" y="600" width="200" height="110" rx="10" fill="#ffffff30"/>
+    <text x="420" y="625" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🔧 API服务</text>
+    <text x="420" y="645" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• Flask应用</text>
+    <text x="420" y="660" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• RESTful API</text>
+    <text x="420" y="675" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• JWT认证</text>
+    <text x="420" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 5000</text>
+    
+    <!-- AI服务 -->
+    <rect x="540" y="600" width="200" height="110" rx="10" fill="#ffffff30"/>
+    <text x="640" y="625" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🤖 AI推理服务</text>
+    <text x="640" y="645" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 模型推理</text>
+    <text x="640" y="660" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• GPU加速</text>
+    <text x="640" y="675" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 流式输出</text>
+    <text x="640" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 8000</text>
+    
+    <!-- 文件服务 -->
+    <rect x="760" y="600" width="200" height="110" rx="10" fill="#ffffff30"/>
+    <text x="860" y="625" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">📁 文件服务</text>
+    <text x="860" y="645" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• MinIO存储</text>
+    <text x="860" y="660" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 图片上传</text>
+    <text x="860" y="675" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• CDN分发</text>
+    <text x="860" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 9000</text>
+    
+    <!-- 向量数据库服务 -->
+  <rect x="980" y="600" width="200" height="110" rx="10" fill="#ffffff30"/>
+  <text x="1080" y="625" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🔍 向量数据库</text>
+  <text x="1080" y="645" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• Milvus集群</text>
+  <text x="1080" y="660" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 向量检索</text>
+  <text x="1080" y="675" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• RAG支持</text>
+  <text x="1080" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 19530</text>
+
+  <!-- 数据存储服务 -->
+  <rect x="1200" y="600" width="200" height="110" rx="10" fill="#ffffff30"/>
+  <text x="1300" y="625" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">💾 数据存储</text>
+  <text x="1300" y="645" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• PostgreSQL</text>
+  <text x="1300" y="660" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 业务数据</text>
+  <text x="1300" y="675" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 用户管理</text>
+  <text x="1300" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 5432</text>
+    
+    <!-- 监控服务 -->
+  <rect x="1420" y="600" width="200" height="110" rx="10" fill="#ffffff30"/>
+  <text x="1520" y="625" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">📊 监控服务</text>
+  <text x="1520" y="645" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• Prometheus</text>
+  <text x="1520" y="660" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 指标收集</text>
+  <text x="1520" y="675" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 性能监控</text>
+  <text x="1520" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 9090</text>
+  </g>
+  
+  <!-- 数据存储层 -->
+  <g id="data-storage-layer">
+    <rect x="50" y="760" width="1700" height="160" rx="15" fill="url(#dataGradient)" filter="url(#shadow)"/>
+    <text x="900" y="790" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">💾 数据存储层 (Data Storage Layer)</text>
+    
+    <!-- 主数据库 -->
+    <rect x="100" y="810" width="250" height="90" rx="10" fill="#ffffff30"/>
+    <text x="225" y="835" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🗄️ PostgreSQL集群</text>
+    <text x="225" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 主从复制 (1主2从)</text>
+    <text x="225" y="870" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 读写分离</text>
+    <text x="225" y="885" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 5432</text>
+    
+    <!-- 向量数据库 -->
+    <rect x="370" y="810" width="250" height="90" rx="10" fill="#ffffff30"/>
+    <text x="495" y="835" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🔍 Milvus集群</text>
+    <text x="495" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 分布式向量存储</text>
+    <text x="495" y="870" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 高维索引</text>
+    <text x="495" y="885" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 19530</text>
+    
+    <!-- 文档数据库 -->
+    <rect x="640" y="810" width="250" height="90" rx="10" fill="#ffffff30"/>
+    <text x="765" y="835" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">📄 MongoDB集群</text>
+    <text x="765" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 副本集 (3节点)</text>
+    <text x="765" y="870" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 分片集群</text>
+    <text x="765" y="885" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 27017</text>
+    
+    <!-- 对象存储 -->
+    <rect x="910" y="810" width="250" height="90" rx="10" fill="#ffffff30"/>
+    <text x="1035" y="835" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">☁️ 对象存储</text>
+    <text x="1035" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• MinIO分布式存储</text>
+    <text x="1035" y="870" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 多副本备份</text>
+    <text x="1035" y="885" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 9000</text>
+    
+    <!-- 时序数据库 -->
+    <rect x="1180" y="810" width="250" height="90" rx="10" fill="#ffffff30"/>
+    <text x="1305" y="835" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">📈 InfluxDB</text>
+    <text x="1305" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 监控指标存储</text>
+    <text x="1305" y="870" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 时间序列数据</text>
+    <text x="1305" y="885" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 8086</text>
+    
+    <!-- 备份存储 -->
+    <rect x="1450" y="810" width="200" height="90" rx="10" fill="#ffffff30"/>
+    <text x="1550" y="835" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">💿 备份存储</text>
+    <text x="1550" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 定时备份</text>
+    <text x="1550" y="870" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 异地容灾</text>
+    <text x="1550" y="885" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 冷存储</text>
+  </g>
+  
+  <!-- 监控与运维层 -->
+  <g id="monitor-layer">
+    <rect x="50" y="950" width="1700" height="160" rx="15" fill="url(#monitorGradient)" filter="url(#shadow)"/>
+    <text x="900" y="980" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">📊 监控与运维层 (Monitoring & Operations)</text>
+    
+    <!-- 监控系统 -->
+    <rect x="100" y="1000" width="200" height="90" rx="10" fill="#ffffff30"/>
+    <text x="200" y="1025" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">📊 Prometheus</text>
+    <text x="200" y="1045" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 指标收集</text>
+    <text x="200" y="1060" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 告警规则</text>
+    <text x="200" y="1075" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 9090</text>
+    
+    <!-- 可视化 -->
+    <rect x="320" y="1000" width="200" height="90" rx="10" fill="#ffffff30"/>
+    <text x="420" y="1025" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">📈 Grafana</text>
+    <text x="420" y="1045" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 数据可视化</text>
+    <text x="420" y="1060" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 仪表盘</text>
+    <text x="420" y="1075" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 3000</text>
+    
+    <!-- 日志系统 -->
+    <rect x="540" y="1000" width="200" height="90" rx="10" fill="#ffffff30"/>
+    <text x="640" y="1025" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">📝 ELK Stack</text>
+    <text x="640" y="1045" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 日志聚合</text>
+    <text x="640" y="1060" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 全文搜索</text>
+    <text x="640" y="1075" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 5601</text>
+    
+    <!-- 链路追踪 -->
+    <rect x="760" y="1000" width="200" height="90" rx="10" fill="#ffffff30"/>
+    <text x="860" y="1025" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🔍 Jaeger</text>
+    <text x="860" y="1045" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 分布式追踪</text>
+    <text x="860" y="1060" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 性能分析</text>
+    <text x="860" y="1075" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 16686</text>
+    
+    <!-- 告警系统 -->
+    <rect x="980" y="1000" width="200" height="90" rx="10" fill="#ffffff30"/>
+    <text x="1080" y="1025" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🚨 AlertManager</text>
+    <text x="1080" y="1045" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 告警管理</text>
+    <text x="1080" y="1060" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 通知路由</text>
+    <text x="1080" y="1075" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 9093</text>
+    
+    <!-- CI/CD -->
+    <rect x="1200" y="1000" width="200" height="90" rx="10" fill="#ffffff30"/>
+    <text x="1300" y="1025" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">🔄 GitLab CI</text>
+    <text x="1300" y="1045" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 持续集成</text>
+    <text x="1300" y="1060" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 自动部署</text>
+    <text x="1300" y="1075" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 80</text>
+    
+    <!-- 配置管理 -->
+    <rect x="1420" y="1000" width="200" height="90" rx="10" fill="#ffffff30"/>
+    <text x="1520" y="1025" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="white">⚙️ Consul</text>
+    <text x="1520" y="1045" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 服务发现</text>
+    <text x="1520" y="1060" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 配置中心</text>
+    <text x="1520" y="1075" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">• 端口: 8500</text>
+  </g>
+  
+  <!-- 安全与网络层 -->
+  <g id="security-layer">
+    <rect x="50" y="1140" width="1700" height="120" rx="15" fill="#374151" filter="url(#shadow)"/>
+    <text x="900" y="1170" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">🔒 安全与网络层 (Security & Network Layer)</text>
+    
+    <rect x="150" y="1190" width="180" height="50" rx="8" fill="#ffffff30"/>
+    <text x="240" y="1210" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">🛡️ WAF防护</text>
+    <text x="240" y="1225" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">Web应用防火墙</text>
+    
+    <rect x="350" y="1190" width="180" height="50" rx="8" fill="#ffffff30"/>
+    <text x="440" y="1210" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">🔐 SSL/TLS</text>
+    <text x="440" y="1225" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">加密传输</text>
+    
+    <rect x="550" y="1190" width="180" height="50" rx="8" fill="#ffffff30"/>
+    <text x="640" y="1210" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">🌐 VPC网络</text>
+    <text x="640" y="1225" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">私有网络隔离</text>
+    
+    <rect x="750" y="1190" width="180" height="50" rx="8" fill="#ffffff30"/>
+    <text x="840" y="1210" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">🔑 密钥管理</text>
+    <text x="840" y="1225" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">KMS密钥服务</text>
+    
+    <rect x="950" y="1190" width="180" height="50" rx="8" fill="#ffffff30"/>
+    <text x="1040" y="1210" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">🚫 DDoS防护</text>
+    <text x="1040" y="1225" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">攻击防护</text>
+    
+    <rect x="1150" y="1190" width="180" height="50" rx="8" fill="#ffffff30"/>
+    <text x="1240" y="1210" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">👤 身份认证</text>
+    <text x="1240" y="1225" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">OAuth2/JWT</text>
+    
+    <rect x="1350" y="1190" width="180" height="50" rx="8" fill="#ffffff30"/>
+    <text x="1440" y="1210" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">📊 审计日志</text>
+    <text x="1440" y="1225" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="white">操作审计</text>
+  </g>
+  
+  <!-- 网络连接线 -->
+  <!-- 垂直数据流 -->
+  <line x1="900" y1="180" x2="900" y2="200" stroke="#3B82F6" stroke-width="4" marker-end="url(#networkArrow)"/>
+  <line x1="900" y1="290" x2="900" y2="310" stroke="#3B82F6" stroke-width="4" marker-end="url(#networkArrow)"/>
+  <line x1="900" y1="520" x2="900" y2="540" stroke="#3B82F6" stroke-width="4" marker-end="url(#networkArrow)"/>
+  <line x1="900" y1="730" x2="900" y2="750" stroke="#3B82F6" stroke-width="4" marker-end="url(#networkArrow)"/>
+  <line x1="900" y1="920" x2="900" y2="940" stroke="#3B82F6" stroke-width="4" marker-end="url(#networkArrow)"/>
+  <line x1="900" y1="1110" x2="900" y2="1130" stroke="#3B82F6" stroke-width="4" marker-end="url(#networkArrow)"/>
+  
+  <!-- 横向服务连接 -->
+  <line x1="300" y1="655" x2="320" y2="655" stroke="#10B981" stroke-width="2" marker-end="url(#networkArrow)"/>
+  <line x1="520" y1="655" x2="540" y2="655" stroke="#10B981" stroke-width="2" marker-end="url(#networkArrow)"/>
+  <line x1="740" y1="655" x2="760" y2="655" stroke="#10B981" stroke-width="2" marker-end="url(#networkArrow)"/>
+  <line x1="960" y1="655" x2="980" y2="655" stroke="#10B981" stroke-width="2" marker-end="url(#networkArrow)"/>
+  <line x1="1180" y1="655" x2="1200" y2="655" stroke="#10B981" stroke-width="2" marker-end="url(#networkArrow)"/>
+  <line x1="1400" y1="655" x2="1420" y2="655" stroke="#10B981" stroke-width="2" marker-end="url(#networkArrow)"/>
+  
+  <!-- 环境标注 -->
+  <text x="100" y="1320" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e293b">🌍 部署环境:</text>
+  <text x="100" y="1340" font-family="Arial, sans-serif" font-size="12" fill="#64748b">• 生产环境: 阿里云/腾讯云 • 测试环境: 本地K8s集群 • 开发环境: Docker Compose</text>
+  
+  <text x="100" y="1370" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e293b">⚡ 性能指标:</text>
+  <text x="100" y="1390" font-family="Arial, sans-serif" font-size="12" fill="#64748b">• 并发用户: 10000+ • 响应时间: <200ms • 可用性: 99.9% • GPU利用率: 80%+</text>
+  
+</svg>
